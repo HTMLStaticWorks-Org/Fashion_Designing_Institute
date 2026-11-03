@@ -1,0 +1,2 @@
+# Fashion_Designing_Institute
+Automated website repository for Fashion_Designing_Institute
