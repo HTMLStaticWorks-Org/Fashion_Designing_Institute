@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Sanctuary Dashboard | Solace Float Spa</title>
+    <title>Student Dashboard | Atelia</title>
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <meta name="description"
+        content="Student learning and portfolio management dashboard for Atelia. Access course modules, upload portfolio looks, and register for runway events.">
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,7 +17,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* ---- Application detail view: status pipeline ---- */
+        /* ---- Course module & curriculum pipeline ---- */
         .pipeline {
             display: flex;
             align-items: center;
@@ -80,7 +82,7 @@
         .pipeline-step.active .pipeline-icon {
             border-color: var(--color-brand-accent);
             color: var(--color-brand-accent);
-            box-shadow: 0 0 0 4px rgba(26, 107, 114, 0.15);
+            box-shadow: 0 0 0 4px rgba(101, 28, 50, 0.15);
         }
 
         .pipeline-label {
@@ -199,134 +201,514 @@
             color: var(--color-text-secondary);
         }
 
-        .app-callout-btn {
-            margin-top: var(--space-3);
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
+        .upload-slot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            flex-wrap: wrap;
         }
 
-        @media (min-width: 901px) and (max-width: 1024px) {
-            .dashboard-sidebar {
-                width: 240px;
-            }
-
-            .dashboard-main {
-                margin-left: 240px;
-            }
-
-            .dashboard-content {
-                padding: var(--space-5) var(--space-4);
-            }
-
-            .dash-kpi-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: var(--space-3) !important;
-            }
-
-            .overview-split {
-                grid-template-columns: 1fr !important;
-                gap: var(--space-5) !important;
-            }
-
-            .doc-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                gap: var(--space-3) !important;
-            }
-
-            .doc-card {
-                min-width: 0;
-            }
-
-            .doc-card .doc-name {
-                white-space: normal;
-                overflow-wrap: break-word;
-            }
-
-            .profile-hero {
-                padding: var(--space-4) !important;
-                gap: var(--space-3) !important;
-            }
-
-            .dash-grid-2col {
-                grid-template-columns: 1fr !important;
-            }
+        .upload-slot-body {
+            flex: 1 1 200px;
+            min-width: 0;
         }
 
-        [dir="rtl"] .app-back-link .ph-arrow-left {
-            transform: scaleX(-1);
+        .upload-slot-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        @media (max-width: 600px) {
+        .upload-slot-meta {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: var(--space-3);
+            padding-bottom: var(--space-4);
+            border-inline-start: 2px solid var(--color-border);
+            padding-inline-start: var(--space-4);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            inset-inline-start: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--color-brand-secondary);
+            border: 2px solid var(--color-bg-primary);
+        }
+
+        .timeline-item:last-child {
+            border-inline-start-color: transparent;
+            padding-bottom: 0;
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            min-width: 85px;
+        }
+
+        @media (max-width: 640px) {
             .app-detail-id {
                 text-align: start;
             }
         }
 
-        @media (max-width: 480px) {
-            .app-detail-school {
+        /* ---- Responsive 2-col grids used by overview & messages ---- */
+        @media (max-width: 900px) {
+            .overview-split {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-brand-accent), var(--color-brand-secondary));
+            border-radius: var(--radius-full);
+        }
+
+        /* ---- Mobile & Tablet Alignment Fixes ---- */
+        .dashboard-main,
+        .dashboard-content,
+        .dash-view,
+        .dash-card {
+            min-width: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .interview-date-box {
+            flex: 0 0 72px;
+            text-align: center;
+            padding: 0.65rem 0.4rem;
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+        }
+
+        .interview-month {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--color-brand-secondary);
+            text-transform: uppercase;
+        }
+
+        .interview-day {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-text-primary);
+        }
+
+        .interview-info {
+            flex: 1 1 220px;
+            min-width: 0;
+        }
+
+        .interview-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .interview-info p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .interview-actions {
+            flex-shrink: 0;
+            margin-inline-start: auto;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-row strong {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .setting-row p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        .setting-row .switch {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .overview-split {
+                grid-template-columns: 1fr !important;
+            }
+
+            .shortlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .dash-page-head {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: var(--space-3);
             }
 
-            .app-detail-logo {
-                width: 64px;
-                height: 64px;
-            }
-
-            .app-detail-head {
-                gap: var(--space-3);
-            }
-
-            .app-detail-id {
-                display: flex;
-                align-items: baseline;
-                gap: 0.5rem;
+            .dash-page-actions,
+            .dash-page-actions .btn {
                 width: 100%;
-                padding-top: var(--space-3);
-                border-top: 1px solid var(--color-border);
+                justify-content: center;
             }
 
-            .app-detail-id>div {
-                margin-bottom: 0 !important;
-            }
-
-            .app-callout {
+            .interview-card {
                 flex-direction: column;
-                gap: var(--space-2);
-                padding: var(--space-3);
+                align-items: flex-start;
+                gap: var(--space-3);
             }
 
-            .app-callout-btn {
-                display: block;
-                text-align: center;
+            .interview-date-box {
+                display: inline-flex;
+                align-items: baseline;
+                gap: 0.45rem;
+                flex: none;
+                padding: 0.4rem 0.75rem;
             }
 
-            .pipeline {
-                margin: var(--space-4) 0 var(--space-5);
+            .interview-actions,
+            .interview-actions .btn {
+                width: 100%;
+                margin-inline-start: 0;
             }
 
-            .pipeline::before,
-            .pipeline-progress {
-                inset-inline: 19px auto;
-                top: 20px;
+            .setting-row {
+                align-items: flex-start;
+            }
+        }
+
+        /* ---- Recent Learning Activity & Studio Deadlines (.action-list) ---- */
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-soft);
+            background: var(--color-bg-secondary);
+            text-decoration: none;
+            color: inherit;
+            transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .action-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-brand-accent);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .action-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .action-icon.is-warn {
+            background: var(--color-status-interview-bg);
+            color: var(--color-status-interview);
+        }
+
+        .action-icon.is-info {
+            background: var(--color-accent-tint);
+            color: var(--color-brand-accent);
+        }
+
+        .action-icon.is-ok {
+            background: var(--color-status-admitted-bg);
+            color: var(--color-status-admitted);
+        }
+
+        .action-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .action-body strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--color-text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .action-body span {
+            display: block;
+            font-size: 0.825rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .action-arrow {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: transform var(--transition-fast);
+        }
+
+        .action-item:hover .action-arrow {
+            transform: translateX(3px);
+            color: var(--color-brand-accent);
+        }
+
+        .dash-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: var(--space-4);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--color-border);
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* ---- My Fashion Projects (.shortlist-img uniform crop) ---- */
+        .shortlist-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shortlist-img {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: var(--color-bg-secondary);
+        }
+
+        .shortlist-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .shortlist-body .badge-chip {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-brand-accent);
+            background: var(--color-accent-tint);
+            padding: 0.2rem 0.65rem;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-2);
+        }
+
+        /* ---- Faculty & Studio Messages (.msg-shell) ---- */
+        .msg-shell {
+            display: grid;
+            grid-template-columns: 310px 1fr;
+            min-height: 480px;
+        }
+
+        .msg-list {
+            border-inline-end: 1px solid var(--color-border);
+            background: var(--color-bg-secondary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .msg-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border: none;
+            border-bottom: 1px solid var(--color-border);
+            background: transparent;
+            text-align: start;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+
+        .msg-item:hover,
+        .msg-item[aria-pressed="true"] {
+            background: var(--color-bg-primary);
+        }
+
+        .msg-item[aria-pressed="true"] {
+            border-inline-start: 3px solid var(--color-brand-accent);
+        }
+
+        .msg-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .msg-meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .msg-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .msg-unread-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-brand-accent);
+            flex-shrink: 0;
+        }
+
+        .msg-preview {
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .msg-time {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            flex-shrink: 0;
+        }
+
+        .msg-thread {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: var(--color-bg-primary);
+        }
+
+        .msg-thread-head {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .msg-thread-body {
+            flex: 1;
+            padding: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            overflow-y: auto;
+            max-height: 360px;
+        }
+
+        .msg-bubble {
+            max-width: 78%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-soft);
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            align-self: flex-start;
+        }
+
+        .msg-bubble.is-mine {
+            background: var(--color-brand-accent);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .msg-bubble .stamp {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.72;
+            margin-top: 0.25rem;
+        }
+
+        .msg-thread-form {
+            display: flex;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-4);
+            border-top: 1px solid var(--color-border);
+            background: var(--color-bg-secondary);
+        }
+
+        .msg-thread-form .form-control {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+            .msg-shell {
+                grid-template-columns: 1fr;
             }
 
-            .pipeline::before {
-                bottom: 20px;
-            }
-
-            .pipeline-progress {
-                height: calc((100% - 40px) * 0.75);
-            }
-
-            .pipeline-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .pipeline-label {
-                font-size: 0.875rem;
+            .msg-list {
+                border-inline-end: none;
+                border-bottom: 1px solid var(--color-border);
             }
         }
     </style>
@@ -339,68 +721,61 @@
         <div class="dashboard-sidebar-header">
             <a href="index.html" class="navbar-brand">
                 <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Solace">
-                    <title>Solace</title>
-                    <g transform="translate(4, 4) scale(1.15)">
-                        <circle cx="24" cy="24" r="22" fill="#1A6B72" opacity="0.12" />
-                        <circle cx="24" cy="24" r="22" fill="none" stroke="#52B69A" stroke-width="1.8" opacity="0.4" />
-                        <path d="M 24 3 A 21 21 0 1 1 4 26" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.75" />
-                        <path d="M 24 8 A 16 16 0 1 1 9 28" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.85" />
-                        <path d="M 24 13 A 11 11 0 1 1 14 29" fill="none" stroke="#52B69A" stroke-width="1.8"
-                            stroke-linecap="round" opacity="0.95" />
-                        <g transform="translate(24, 24) rotate(-35) translate(-24, -24)">
-                            <circle cx="24" cy="10" r="3.2" fill="#1A6B72" />
-                            <path
-                                d="M 21.5 14 C 21.5 14 20 22 21 28 C 22 33 22.5 38 22.5 38 L 25.5 38 C 25.5 38 26 33 27 28 C 28 22 26.5 14 26.5 14 Z"
-                                fill="#1A6B72" />
-                            <path d="M 22 16 C 17 13 11 10 7 9 C 6.5 10.5 8 12.5 12 14.5 C 16 16.5 21.5 18 21.5 18 Z"
-                                fill="#1A6B72" />
-                            <path d="M 26 16 C 31 13 37 10 41 9 C 41.5 10.5 40 12.5 36 14.5 C 32 16.5 26.5 18 26.5 18 Z"
-                                fill="#1A6B72" />
-                        </g>
+                    aria-label="Atelia">
+                    <title>Atelia</title>
+                    <g transform="translate(4, 6)">
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                            stroke-width="1.6" />
+                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
                     </g>
-                    <text class="brand-text" x="66" y="42" font-family="'Lora','Georgia',serif" font-weight="700"
-                        font-size="34" letter-spacing="-0.5" fill="currentColor">Solace</text>
+                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
                 </svg>
             </a>
             <button class="nav-toggle" id="sidebarClose" aria-label="Close Sidebar"
-                style="margin-left: auto; display: none;">
+                style="margin-left: auto;">
                 <i class="ph ph-x"></i>
             </button>
         </div>
 
         <nav class="dashboard-nav">
             <a href="#overview" class="dash-nav-item active" data-view="overview">
-                <i class="ph ph-squares-four"></i> Overview
+                <i class="ph ph-squares-four"></i> Student Overview
             </a>
             <a href="#applications" class="dash-nav-item" data-view="applications">
-                <i class="ph ph-calendar-plus"></i> Slot Booking &amp; Sessions
+                <i class="ph ph-book-open"></i> My Enrolled Courses
+            </a>
+            <a href="#application" class="dash-nav-item" data-view="application">
+                <i class="ph ph-list-checks"></i> Course Modules &amp; Progress
             </a>
             <a href="#vault" class="dash-nav-item" data-view="vault">
-                <i class="ph ph-floppy-disk"></i> Package Tracker &amp; Vault
+                <i class="ph ph-upload-simple"></i> Portfolio Uploads
             </a>
             <a href="#shortlist" class="dash-nav-item" data-view="shortlist">
-                <i class="ph ph-heart"></i> Saved Suites &amp; Therapies
+                <i class="ph ph-images"></i> My Fashion Projects
             </a>
             <a href="#interviews" class="dash-nav-item" data-view="interviews">
-                <i class="ph ph-clock"></i> Float Reservations
-                <span class="dash-nav-badge">1</span>
+                <i class="ph ph-calendar-star"></i> Shows &amp; Workshops
+                <span class="dash-nav-badge">3</span>
             </a>
             <a href="#messages" class="dash-nav-item" data-view="messages">
-                <i class="ph ph-chat-circle-dots"></i> Guide Messages
+                <i class="ph ph-chat-circle-dots"></i> Faculty Messages
                 <span class="dash-nav-badge">2</span>
             </a>
             <a href="#payments" class="dash-nav-item" data-view="payments">
-                <i class="ph ph-receipt"></i> Membership &amp; Payments
+                <i class="ph ph-certificate"></i> Certificates &amp; Tuition
             </a>
             <a href="#notifications" class="dash-nav-item" data-view="notifications">
                 <i class="ph ph-bell-ringing"></i> Notifications
                 <span class="dash-nav-badge">2</span>
             </a>
             <a href="#profile" class="dash-nav-item" data-view="profile">
-                <i class="ph ph-user-circle"></i> Guest Profile &amp; Preferences
+                <i class="ph ph-user-circle"></i> Student Profile
             </a>
             <a href="#settings" class="dash-nav-item" data-view="settings">
                 <i class="ph ph-gear"></i> Settings
@@ -411,13 +786,13 @@
             <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
                 <div
                     style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-brand-accent); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
-                    SJ</div>
+                    AK</div>
                 <div>
-                    <div style="font-weight: 600; font-size: 0.875rem;">Dr. Sarah Jenkins</div>
-                    <div style="color: var(--color-text-secondary); font-size: 0.75rem;">Zenith Spa Member</div>
+                    <div style="font-weight: 600; font-size: 0.875rem;">Aria Kapoor</div>
+                    <div style="color: var(--color-text-secondary); font-size: 0.75rem;">B.Des Fashion • Year 3</div>
                 </div>
             </div>
-            <a href="index.html" class="dash-nav-item" style="color: var(--color-status-reject); padding: 0;">
+            <a href="login.html" class="dash-nav-item" style="color: var(--color-status-reject); padding: 0;">
                 <i class="ph ph-sign-out"></i> Logout
             </a>
         </div>
@@ -428,41 +803,28 @@
         <!-- Header -->
         <header class="dashboard-header">
             <div class="dashboard-header-start">
-                <button class="nav-toggle" id="sidebarToggle" style="display: none;">
+                <button class="nav-toggle" id="sidebarToggle" aria-label="Open Sidebar Menu">
                     <i class="ph ph-list"></i>
                 </button>
                 <a href="index.html" class="navbar-brand dashboard-header-brand">
                     <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                        aria-label="Solace">
-                        <title>Solace</title>
-                        <g transform="translate(4, 4) scale(1.15)">
-                            <circle cx="24" cy="24" r="22" fill="#1A6B72" opacity="0.12" />
-                            <circle cx="24" cy="24" r="22" fill="none" stroke="#52B69A" stroke-width="1.8"
-                                opacity="0.4" />
-                            <path d="M 24 3 A 21 21 0 1 1 4 26" fill="none" stroke="#52B69A" stroke-width="2"
-                                stroke-linecap="round" opacity="0.75" />
-                            <path d="M 24 8 A 16 16 0 1 1 9 28" fill="none" stroke="#52B69A" stroke-width="2"
-                                stroke-linecap="round" opacity="0.85" />
-                            <path d="M 24 13 A 11 11 0 1 1 14 29" fill="none" stroke="#52B69A" stroke-width="1.8"
-                                stroke-linecap="round" opacity="0.95" />
-                            <g transform="translate(24, 24) rotate(-35) translate(-24, -24)">
-                                <circle cx="24" cy="10" r="3.2" fill="#1A6B72" />
-                                <path
-                                    d="M 21.5 14 C 21.5 14 20 22 21 28 C 22 33 22.5 38 22.5 38 L 25.5 38 C 25.5 38 26 33 27 28 C 28 22 26.5 14 26.5 14 Z"
-                                    fill="#1A6B72" />
-                                <path
-                                    d="M 22 16 C 17 13 11 10 7 9 C 6.5 10.5 8 12.5 12 14.5 C 16 16.5 21.5 18 21.5 18 Z"
-                                    fill="#1A6B72" />
-                                <path
-                                    d="M 26 16 C 31 13 37 10 41 9 C 41.5 10.5 40 12.5 36 14.5 C 32 16.5 26.5 18 26.5 18 Z"
-                                    fill="#1A6B72" />
-                            </g>
-                        </g>
-                        <text class="brand-text" x="66" y="42" font-family="'Lora','Georgia',serif" font-weight="700"
-                            font-size="34" letter-spacing="-0.5" fill="currentColor">Solace</text>
-                    </svg>
+                    aria-label="Atelia">
+                    <title>Atelia</title>
+                    <g transform="translate(4, 6)">
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                            stroke-width="1.6" />
+                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
+                    </g>
+                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
+                </svg>
                 </a>
-                <h2 class="sr-only" id="dashTitle">Overview</h2>
+                <h2 class="sr-only" id="dashTitle">Student Overview</h2>
             </div>
 
             <div class="dashboard-header-end">
@@ -473,840 +835,345 @@
                     <i class="ph ph-arrows-left-right"></i>
                 </button>
                 <a href="#profile" class="header-profile" data-view="profile"
-                    aria-label="Guest profile &amp; preferences"
+                    aria-label="Student profile &amp; preferences"
                     style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; border: 2px solid var(--color-brand-secondary); padding: 0;">
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-                        alt="Dr. Sarah Jenkins" style="width: 100%; height: 100%; object-fit: cover;">
+                        alt="Aria Kapoor" style="width: 100%; height: 100%; object-fit: cover;">
                 </a>
             </div>
         </header>
 
         <div class="dashboard-content">
 
-            <!-- ============================ OVERVIEW ============================ -->
-            <section class="dash-view is-active" id="view-overview" data-title="Overview" tabindex="-1">
+            <!-- ============================ STUDENT OVERVIEW ============================ -->
+            <section class="dash-view is-active" id="view-overview" data-title="Student Overview" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
-                        <h2>Welcome back, Sarah</h2>
-                        <div class="sub">Your sanctuary float credits are active &mdash; 2 reserved sessions coming up
-                            this week.</div>
+                        <h2>Welcome back, Aria</h2>
+                        <div class="sub">Autumn Term 2026 &mdash; 78% curriculum completion &amp; 1 runway fitting
+                            scheduled this week.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <a href="#applications" class="btn btn-primary"
+                        <a href="#vault" class="btn btn-primary"
                             style="padding: 0.5rem 1rem; font-size: 0.875rem;">
-                            <i class="ph ph-plus"></i> Book Float Slot
+                            <i class="ph ph-upload-simple"></i> Upload Portfolio Look
                         </a>
                     </div>
                 </div>
 
                 <div class="dash-kpi-grid">
                     <a class="kpi-card" href="#applications">
-                        <div class="kpi-icon"><i class="ph-fill ph-drop"></i></div>
+                        <div class="kpi-icon"><i class="ph-fill ph-book-open"></i></div>
                         <div class="kpi-info">
-                            <h4>Active Packages</h4>
-                            <div class="kpi-value">2</div>
+                            <h4>Enrolled Courses</h4>
+                            <div class="kpi-value">4</div>
+                        </div>
+                    </a>
+                    <a class="kpi-card" href="#application">
+                        <div class="kpi-icon"
+                            style="color: var(--color-status-admitted); background: var(--color-status-admitted-bg);">
+                            <i class="ph-fill ph-chart-line-up"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h4>Course Completion</h4>
+                            <div class="kpi-value">78%</div>
                         </div>
                     </a>
                     <a class="kpi-card" href="#shortlist">
                         <div class="kpi-icon"
                             style="color: var(--color-status-shortlist); background: var(--color-status-shortlist-bg);">
-                            <i class="ph-fill ph-heart"></i>
+                            <i class="ph-fill ph-images"></i>
                         </div>
                         <div class="kpi-info">
-                            <h4>Saved Suites</h4>
-                            <div class="kpi-value">3</div>
-                        </div>
-                    </a>
-                    <a class="kpi-card" href="#vault">
-                        <div class="kpi-icon"
-                            style="color: var(--color-status-review); background: var(--color-status-review-bg);"><i
-                                class="ph-fill ph-floppy-disk"></i></div>
-                        <div class="kpi-info">
-                            <h4>Float Credits</h4>
-                            <div class="kpi-value">4<span
-                                    style="font-size: 0.875rem; color: var(--color-text-secondary);">/6 credits</span>
+                            <h4>Portfolio Submissions</h4>
+                            <div class="kpi-value">6<span
+                                    style="font-size: 0.875rem; color: var(--color-text-secondary);"> looks</span>
                             </div>
                         </div>
                     </a>
                     <a class="kpi-card" href="#interviews">
                         <div class="kpi-icon"
                             style="color: var(--color-status-interview); background: var(--color-status-interview-bg);">
-                            <i class="ph-fill ph-calendar-blank"></i>
+                            <i class="ph-fill ph-calendar-star"></i>
                         </div>
                         <div class="kpi-info">
-                            <h4>Upcoming Float</h4>
-                            <div class="kpi-value">1</div>
+                            <h4>Upcoming Events</h4>
+                            <div class="kpi-value">3</div>
                         </div>
                     </a>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-6); align-items: start;"
                     class="overview-split">
-                    <!-- Next actions -->
+                    <!-- Recent Learning Activity & Workshops -->
                     <div class="dash-card" style="margin-bottom: 0;">
                         <div class="dash-page-head" style="margin-bottom: var(--space-3);">
                             <div>
-                                <h3 style="margin-bottom: 0;">Needs Your Attention</h3>
+                                <h3 style="margin-bottom: 0;">Recent Learning Activity &amp; Studio Deadlines</h3>
                             </div>
                         </div>
 
-                        <div class="notif-item is-unread">
-                            <div class="notif-icon"
-                                style="background: var(--color-status-reject-bg); color: var(--color-status-reject);"><i
-                                    class="ph-fill ph-warning-circle"></i></div>
-                            <div class="notif-main">
-                                <div class="t">Sensory preferences update</div>
-                                <div class="d">Customize audio and lighting for your upcoming 90-min float.</div>
-                            </div>
-                            <a href="#profile" class="btn btn-outline"
-                                style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Customize</a>
-                        </div>
+                        <div class="action-list">
+                            <a href="#application" class="action-item">
+                                <div class="action-icon is-warn"><i class="ph-fill ph-scissors"></i></div>
+                                <div class="action-body">
+                                    <strong>Module 04: Bias-Cut Silk Draping Critique</strong>
+                                    <span>Prof. Elena Vance &middot; Studio B &middot; Due Fri 4:00 PM</span>
+                                </div>
+                                <i class="ph ph-caret-right action-arrow"></i>
+                            </a>
 
-                        <div class="notif-item is-unread">
-                            <div class="notif-icon"
-                                style="background: var(--color-status-interview-bg); color: var(--color-status-interview);">
-                                <i class="ph-fill ph-calendar-check"></i>
-                            </div>
-                            <div class="notif-main">
-                                <div class="t">Confirm float session arrival time</div>
-                                <div class="d">Downtown Sanctuary &middot; Nov 15, 10:30 AM</div>
-                            </div>
-                            <a href="#interviews" class="btn btn-outline"
-                                style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Confirm</a>
-                        </div>
+                            <a href="#interviews" class="action-item">
+                                <div class="action-icon is-info"><i class="ph-fill ph-sparkle"></i></div>
+                                <div class="action-body">
+                                    <strong>Autumn Graduate Runway — Model Fitting Slot</strong>
+                                    <span>Nov 22, 3:30 PM &middot; Runway Hall A &middot; Confirmed</span>
+                                </div>
+                                <i class="ph ph-caret-right action-arrow"></i>
+                            </a>
 
-                        <div class="notif-item">
-                            <div class="notif-icon"
-                                style="background: var(--color-status-applied-bg); color: var(--color-status-applied);">
-                                <i class="ph-fill ph-receipt"></i>
-                            </div>
-                            <div class="notif-main">
-                                <div class="t">Monthly Zenith renewal due</div>
-                                <div class="d">Zenith Membership &middot; $189 due Nov 02</div>
-                            </div>
-                            <a href="#payments" class="btn btn-outline"
-                                style="padding: 0.3rem 0.7rem; font-size: 0.78rem; align-self: center;">Pay</a>
+                            <a href="#vault" class="action-item">
+                                <div class="action-icon is-ok"><i class="ph-fill ph-check-circle"></i></div>
+                                <div class="action-body">
+                                    <strong>Botanical Indigo Dye Swatch Book Approved</strong>
+                                    <span>Sustainable Textile Lab &middot; Grade: A+ (96%)</span>
+                                </div>
+                                <i class="ph ph-caret-right action-arrow"></i>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Application progress snapshot -->
+                    <!-- Student Achievement & Course Progress -->
                     <div class="dash-card" style="margin-bottom: 0;">
-                        <h3 style="margin-bottom: var(--space-3);">Sanctuary Journey Status</h3>
+                        <div class="dash-page-head" style="margin-bottom: var(--space-3);">
+                            <div>
+                                <h3 style="margin-bottom: 0;">Achievement &amp; Progress</h3>
+                            </div>
+                            <a href="#application" class="auth-link" style="font-size: 0.875rem;">All Modules</a>
+                        </div>
 
-                        <div class="mockup-timeline-track">
-                            <div class="mockup-track-step active">
-                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
-                                <div style="font-size: 0.85rem;">Guest Profile completed</div>
-                            </div>
-                            <div class="mockup-track-step active">
-                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
-                                <div style="font-size: 0.85rem;">4 Float sessions finished</div>
-                            </div>
-                            <div class="mockup-track-step active">
-                                <div class="mockup-track-dot"><i class="ph ph-check"></i></div>
-                                <div style="font-size: 0.85rem;">Health waiver verified</div>
-                            </div>
-                            <div class="mockup-track-step">
-                                <div class="mockup-track-dot">4</div>
-                                <div style="font-size: 0.85rem; color: var(--color-text-secondary);">Next float reserved
+                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                                    <span>Haute Couture Draping III</span>
+                                    <span>85%</span>
                                 </div>
+                                <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                            </div>
+                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                                    <span>CLO 3D &amp; Digital Patterning</span>
+                                    <span>72%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-fill" style="width: 72%;"></div></div>
+                            </div>
+                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                                    <span>Botanical Textile Innovation</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
                             </div>
                         </div>
 
-                        <div class="result-divider"></div>
-
-                        <div class="storage-meter" style="margin-bottom: 0;">
-                            <span class="label">Quarterly Float Target</span>
-                            <div class="meter">
-                                <div class="meter-fill" style="width: 68%;"></div>
-                            </div>
-                            <span class="value">68%</span>
+                        <div class="dash-card-footer">
+                            <span>Dean's Atelier Honor Roll &bull; 3.92 GPA</span>
+                            <a href="#payments" class="auth-link">View Certificates</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ========================== APPLICATIONS ========================== -->
-            <section class="dash-view" id="view-applications" data-title="Slot Booking &amp; Sessions" tabindex="-1">
+            <!-- ============================ MY ENROLLED COURSES ============================ -->
+            <section class="dash-view" id="view-applications" data-title="My Enrolled Courses" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
-                        <h2>Slot Booking &amp; Sessions</h2>
-                        <div class="sub">Reserve float therapy time slots, view booked sessions, and customize suite
-                            amenities.</div>
+                        <h2>My Enrolled Courses</h2>
+                        <div class="sub">Track your active design studios, module completion, and upcoming critiques.</div>
                     </div>
                     <div class="dash-page-actions">
                         <a href="services.html" class="btn btn-primary"
-                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Explore Suites</a>
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                            <i class="ph ph-plus"></i> Browse More Courses
+                        </a>
                     </div>
                 </div>
 
-                <div class="filter-tabs" data-filter-group="applications">
-                    <button type="button" class="filter-tab" aria-pressed="true" data-filter="all">All <span
-                            style="opacity:.6">3</span></button>
-                    <button type="button" class="filter-tab" aria-pressed="false"
-                        data-filter="applied">Scheduled</button>
-                    <button type="button" class="filter-tab" aria-pressed="false" data-filter="review">In Prep</button>
-                    <button type="button" class="filter-tab" aria-pressed="false"
-                        data-filter="interview">Confirmed</button>
-                    <button type="button" class="filter-tab" aria-pressed="false"
-                        data-filter="decision">Completed</button>
-                </div>
+                <div class="dash-card">
+                    <div class="filter-tabs" data-filter-group="apps">
+                        <button type="button" class="filter-tab" data-filter="all" aria-pressed="true">All Courses (4)</button>
+                        <button type="button" class="filter-tab" data-filter="active" aria-pressed="false">In Progress (3)</button>
+                        <button type="button" class="filter-tab" data-filter="completed" aria-pressed="false">Completed (1)</button>
+                    </div>
 
-                <div class="dash-card dash-card--flush">
-                    <div class="dash-table-wrapper">
-                        <table class="dash-table stack-mobile">
+                    <div class="table-responsive">
+                        <table class="dash-table">
                             <thead>
                                 <tr>
-                                    <th>Suite &amp; Experience</th>
-                                    <th>Therapy Modality</th>
-                                    <th>Reserved Date</th>
+                                    <th>Course &amp; Studio</th>
+                                    <th>Faculty Mentor</th>
+                                    <th>Progress</th>
                                     <th>Status</th>
-                                    <th>Next Action Needed</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody data-filter-target="applications">
-                                <tr data-status="interview">
-                                    <td class="cell-primary">
-                                        <div class="dash-school-cell">
-                                            <strong>Executive Isolation Pod #02</strong>
-                                        </div>
-                                    </td>
-                                    <td data-label="Therapy Modality">90 Min Deep Sensory Float</td>
-                                    <td data-label="Reserved Date">Nov 15, 2026</td>
-                                    <td data-label="Status">
-                                        <span class="status-badge status-interview" aria-label="Status: Confirmed">
-                                            <i class="ph-fill ph-calendar-check"></i> Confirmed
-                                        </span>
-                                    </td>
-                                    <td data-label="Next action"
-                                        style="color: var(--color-status-interview); font-size: 0.875rem;">Confirm
-                                        arrival time</td>
-                                    <td class="cell-action"><a href="#view-application" class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                            <tbody data-filter-target="apps">
+                                <tr data-status="active">
+                                    <td><strong>Haute Couture Draping III</strong><br><span
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-301 &middot; Atelier Studio B</span></td>
+                                    <td>Prof. Elena Vance</td>
+                                    <td>85% (6/7 Modules)</td>
+                                    <td><span class="status-badge status-review">In Progress</span></td>
+                                    <td><a href="#application" class="btn btn-primary"
+                                            style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Open Modules</a></td>
                                 </tr>
-                                <tr data-status="review">
-                                    <td class="cell-primary">
-                                        <div class="dash-school-cell">
-                                            <strong>Horizon Open Basin Suite</strong>
-                                        </div>
-                                    </td>
-                                    <td data-label="Therapy Modality">60 Min Salt Hydrotherapy</td>
-                                    <td data-label="Reserved Date">Nov 28, 2026</td>
-                                    <td data-label="Status">
-                                        <span class="status-badge status-review" aria-label="Status: In Prep">
-                                            <i class="ph-fill ph-drop"></i> In Prep
-                                        </span>
-                                    </td>
-                                    <td data-label="Next action"
-                                        style="color: var(--color-text-secondary); font-size: 0.875rem;">Awaiting spa
-                                        check-in</td>
-                                    <td class="cell-action"><a href="#view-application" class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                <tr data-status="active">
+                                    <td><strong>CLO 3D &amp; Digital Pattern Lab</strong><br><span
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-214 &middot; CAD Wing</span></td>
+                                    <td>Prof. Marcus Chen</td>
+                                    <td>72% (5/7 Modules)</td>
+                                    <td><span class="status-badge status-review">In Progress</span></td>
+                                    <td><a href="#application" class="btn btn-outline"
+                                            style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Open Modules</a></td>
                                 </tr>
-                                <tr data-status="applied">
-                                    <td class="cell-primary">
-                                        <div class="dash-school-cell">
-                                            <strong>Couples Sanctuary Suite</strong>
-                                        </div>
-                                    </td>
-                                    <td data-label="Therapy Modality">60 Min Float + Infrared Sauna</td>
-                                    <td data-label="Reserved Date">Oct 15, 2026</td>
-                                    <td data-label="Status">
-                                        <span class="status-badge status-applied" aria-label="Status: Completed">
-                                            <i class="ph-fill ph-check-circle"></i> Completed
-                                        </span>
-                                    </td>
-                                    <td data-label="Next action"
-                                        style="color: var(--color-status-reject); font-size: 0.875rem;">Log post-float
-                                        reflection</td>
-                                    <td class="cell-action"><a href="#view-application" class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">View</a></td>
+                                <tr data-status="active">
+                                    <td><strong>Editorial Styling &amp; Art Direction</strong><br><span
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-310 &middot; Media Studio</span></td>
+                                    <td>Prof. Camille Laurent</td>
+                                    <td>60% (3/5 Modules)</td>
+                                    <td><span class="status-badge status-interview">Critique Due</span></td>
+                                    <td><a href="#application" class="btn btn-outline"
+                                            style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Open Modules</a></td>
+                                </tr>
+                                <tr data-status="completed">
+                                    <td><strong>Botanical Dyeing &amp; Surface Textiles</strong><br><span
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-205 &middot; Textile Lab</span></td>
+                                    <td>Prof. Julian Moreau</td>
+                                    <td>100% (6/6 Modules)</td>
+                                    <td><span class="status-badge status-admitted">Completed</span></td>
+                                    <td><a href="#payments" class="btn btn-outline"
+                                            style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Certificate</a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p class="empty-state" data-filter-empty="applications" hidden>No session reservations at this stage
-                        yet.</p>
+
+                    <div class="empty-state" data-filter-empty="apps" hidden>
+                        No courses match this filter.
+                    </div>
                 </div>
             </section>
 
-            <!-- ======================= APPLICATION DETAIL ======================= -->
-            <section class="dash-view" id="view-application" data-title="Session Slot Detail" data-nav="applications"
-                tabindex="-1">
+            <!-- ============================ COURSE MODULES & PROGRESS ============================ -->
+            <section class="dash-view" id="view-application" data-title="Course Modules &amp; Progress"
+                data-nav="application" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
-                        <a href="#applications" class="app-back-link"
-                            style="color: var(--color-text-secondary); font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: var(--space-2);">
-                            <i class="ph ph-arrow-left"></i> Back to Slot Booking
+                        <a href="#applications" class="auth-link"
+                            style="display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: var(--space-2); font-size: 0.875rem;">
+                            <i class="ph ph-arrow-left"></i> Back to Enrolled Courses
                         </a>
-                        <h2>Session Slot Detail</h2>
-                        <div class="sub">Track timing, water temperature prep, and concierge notes in one place.</div>
+                        <h2>Haute Couture Draping III — Course Modules</h2>
                     </div>
+                    <span class="status-badge status-review" style="padding: 0.5rem 1rem; font-size: 0.875rem;">85%
+                        Complete</span>
                 </div>
 
-                <!-- Session summary -->
-                <div class="dash-card app-detail-head">
-                    <div class="app-detail-school">
-                        <div class="app-detail-logo">
-                            <img src="assets/images/float-pod-1.jpg" alt="Executive Isolation Pod">
-                        </div>
-                        <div>
-                            <h3 style="margin-bottom: var(--space-1);">Executive Isolation Pod #02</h3>
-                            <div
-                                style="color: var(--color-text-secondary); font-size: 0.875rem; margin-bottom: var(--space-2);">
-                                Experience: 90 Min Sensory Deprivation • Downtown Sanctuary</div>
-                            <span class="status-badge status-interview" aria-label="Status: Confirmed Slot">
-                                <i class="ph-fill ph-calendar-check"></i> Confirmed Slot
-                            </span>
-                        </div>
-                    </div>
-                    <div class="app-detail-id">
-                        <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
-                            Reservation ID</div>
-                        <strong>#FLT-2026-8472</strong>
-                    </div>
-                </div>
-
-                <!-- Status pipeline -->
+                <!-- 4-Stage Learning Pipeline -->
                 <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-4);">Session Preparation Pipeline</h3>
+                    <div class="app-detail-head">
+                        <div class="app-detail-school">
+                            <div class="app-detail-logo">
+                                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=300&q=80"
+                                    alt="Haute Couture Draping III">
+                            </div>
+                            <div>
+                                <h3 style="margin-bottom: 0.25rem;">FDI-301: Haute Couture Draping &amp; Tailoring</h3>
+                                <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin: 0;">Mentor:
+                                    Prof. Elena Vance &bull; Studio B</p>
+                            </div>
+                        </div>
+                        <div class="app-detail-id">
+                            <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Term Credit</div>
+                            <div style="font-weight: 700; color: var(--color-brand-accent);">6.0 Credits</div>
+                        </div>
+                    </div>
 
                     <div class="pipeline">
-                        <div class="pipeline-progress"></div>
-
+                        <div class="pipeline-progress" style="width: 75%;"></div>
                         <div class="pipeline-step completed">
-                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
-                            <div class="pipeline-label">Reserved</div>
+                            <div class="pipeline-icon"><i class="ph ph-pencil-line"></i></div>
+                            <div class="pipeline-label">Croquis &amp; Moodboard</div>
                         </div>
-
                         <div class="pipeline-step completed">
-                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
-                            <div class="pipeline-label">Waiver Signed</div>
+                            <div class="pipeline-icon"><i class="ph ph-scissors"></i></div>
+                            <div class="pipeline-label">Muslin Toile</div>
                         </div>
-
                         <div class="pipeline-step completed">
-                            <div class="pipeline-icon"><i class="ph ph-check"></i></div>
-                            <div class="pipeline-label">Suite Sanitized</div>
+                            <div class="pipeline-icon"><i class="ph ph-t-shirt"></i></div>
+                            <div class="pipeline-label">Silk Draping</div>
                         </div>
-
                         <div class="pipeline-step active">
-                            <div class="pipeline-icon"><i class="ph ph-calendar-blank"></i></div>
-                            <div class="pipeline-label">Scheduled</div>
-                        </div>
-
-                        <div class="pipeline-step">
-                            <div class="pipeline-icon"><i class="ph ph-cup"></i></div>
-                            <div class="pipeline-label">Post Tea Lounge</div>
+                            <div class="pipeline-icon"><i class="ph ph-sparkle"></i></div>
+                            <div class="pipeline-label">Runway Jury</div>
                         </div>
                     </div>
 
-                    <!-- Active step callout -->
                     <div class="app-callout">
-                        <i class="ph-fill ph-warning-circle app-callout-icon"></i>
+                        <i class="ph-fill ph-sparkle app-callout-icon"></i>
                         <div>
-                            <strong class="app-callout-title">Action Required: Confirm Arrival Time</strong>
-                            <p class="app-callout-text">Your private suite is pre-allocated with medical-grade Epsom
-                                solution kept at precisely 98.6°F. Please confirm your arrival 15 mins prior.</p>
-                            <a href="#interviews" class="btn btn-primary app-callout-btn">Confirm Reservation</a>
+                            <strong class="app-callout-title">Upcoming Jury Critique: Friday 4:00 PM</strong>
+                            <p class="app-callout-text">Bring your bias-cut silk organza bodice on Form #14 and upload
+                                two studio process plates to your Portfolio Uploads tab.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="app-detail-cols">
-                    <!-- Document checklist -->
-                    <div class="dash-card">
-                        <h3 style="margin-bottom: var(--space-4);">Suite Amenities &amp; Checklist</h3>
-
-                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                            <div
-                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="ph-fill ph-check-circle"
-                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
-                                    <span style="font-size: 0.875rem; font-weight: 500;">Silicone Earplugs &amp; Eye
-                                        Mask</span>
-                                </div>
-                                <a href="#vault"
-                                    style="font-size: 0.75rem; color: var(--color-text-secondary);">Verified</a>
-                            </div>
-
-                            <div
-                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="ph-fill ph-check-circle"
-                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
-                                    <span style="font-size: 0.875rem; font-weight: 500;">Organic Shower &amp; Towel
-                                        Set</span>
-                                </div>
-                                <a href="#vault"
-                                    style="font-size: 0.75rem; color: var(--color-text-secondary);">Ready</a>
-                            </div>
-
-                            <div
-                                style="display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border);">
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="ph-fill ph-check-circle"
-                                        style="color: var(--color-status-admitted); font-size: 1.25rem;"></i>
-                                    <span style="font-size: 0.875rem; font-weight: 500;">1,000 lbs Epsom Solution
-                                        Prep</span>
-                                </div>
-                                <a href="#vault"
-                                    style="font-size: 0.75rem; color: var(--color-text-secondary);">Verified</a>
-                            </div>
-
-                            <!-- Missing requirement -->
-                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <i class="ph-fill ph-warning-circle"
-                                        style="color: var(--color-status-reject); font-size: 1.25rem;"></i>
-                                    <span
-                                        style="font-size: 0.875rem; font-weight: 500; color: var(--color-status-reject);">Skin
-                                        Preference Note</span>
-                                </div>
-                                <div class="form-group" style="margin: 0;">
-                                    <a href="#profile" class="btn btn-outline"
-                                        style="padding: 0.25rem 0.75rem; font-size: 0.75rem; cursor: pointer;">Update</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Concierge messages -->
-                    <div class="dash-card">
-                        <h3 style="margin-bottom: var(--space-4);">Messages from Concierge</h3>
-
-                        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-                            <div
-                                style="background: var(--color-bg-secondary); padding: var(--space-3); border-radius: var(--radius-soft);">
-                                <div
-                                    style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                                    <strong style="font-size: 0.875rem;">Sanctuary Concierge</strong>
-                                    <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Oct 20</span>
-                                </div>
-                                <p style="font-size: 0.875rem; margin-bottom: 0;">Dear Sarah, your 90-minute float pod
-                                    is fully sanitized with UV &amp; 50-micron filtration. Let us know if you prefer
-                                    binaural audio.</p>
-                            </div>
-
-                            <div
-                                style="background: var(--color-bg-secondary); padding: var(--space-3); border-radius: var(--radius-soft); opacity: 0.7;">
-                                <div
-                                    style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                                    <strong style="font-size: 0.875rem;">System</strong>
-                                    <span style="font-size: 0.75rem; color: var(--color-text-secondary);">Oct 12</span>
-                                </div>
-                                <p style="font-size: 0.875rem; margin-bottom: 0;">Your reservation #FLT-2026-8472 has
-                                    been confirmed for Downtown Sanctuary.</p>
-                            </div>
-                        </div>
-
-                        <div
-                            style="margin-top: var(--space-4); border-top: 1px solid var(--color-border); padding-top: var(--space-4);">
-                            <div style="display: flex; gap: var(--space-2);">
-                                <label for="app-detail-reply" class="sr-only">Reply to Concierge</label>
-                                <input type="text" id="app-detail-reply" class="form-control"
-                                    placeholder="Reply to Sanctuary Concierge"
-                                    style="padding: 0.5rem; font-size: 0.875rem;">
-                                <button class="btn btn-primary" aria-label="Send reply"
-                                    style="padding: 0.5rem; border-radius: var(--radius-soft);"><i
-                                        class="ph ph-paper-plane-right"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ========================== DOCUMENT VAULT ========================== -->
-            <section class="dash-view" id="view-vault" data-title="Package Tracker &amp; Vault" tabindex="-1">
-                <div class="dash-page-head">
-                    <div>
-                        <h2>Package Tracker &amp; Credit Vault</h2>
-                        <div class="sub">Track active float credits, package history, and spa gift vouchers.</div>
-                    </div>
-                    <div class="dash-page-actions">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i
-                                class="ph ph-upload-simple"></i> Redeem Voucher</button>
-                    </div>
-                </div>
-
-                <div class="storage-meter">
-                    <span class="label">4 of 6 float credits available for redemption</span>
-                    <div class="meter">
-                        <div class="meter-fill" style="width: 66%;"></div>
-                    </div>
-                    <span class="value">66%</span>
-                </div>
-
-                <div class="dash-card dash-card--flush">
-                    <div class="doc-grid">
-                        <div class="doc-card">
-                            <div class="doc-icon" style="color: var(--color-status-applied);"><i
-                                    class="ph-fill ph-file-pdf"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name">Zenith_Monthly_Credits.pdf</div>
-                                <div class="doc-meta">2 Floats remaining this month</div>
-                            </div>
-                            <button style="color: var(--color-text-secondary);" aria-label="Credit details"><i
-                                    class="ph ph-dots-three-vertical"></i></button>
-                        </div>
-
-                        <div class="doc-card">
-                            <div class="doc-icon" style="color: var(--color-status-shortlist);"><i
-                                    class="ph-fill ph-file-image"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name">3-Pack_Float_Voucher.pdf</div>
-                                <div class="doc-meta">1 Float remaining · Rollover active</div>
-                            </div>
-                            <button style="color: var(--color-text-secondary);" aria-label="Voucher details"><i
-                                    class="ph ph-dots-three-vertical"></i></button>
-                        </div>
-
-                        <div class="doc-card">
-                            <div class="doc-icon" style="color: var(--color-status-applied);"><i
-                                    class="ph-fill ph-file-pdf"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name">Infrared_Sauna_Addon.pdf</div>
-                                <div class="doc-meta">2 Complimentary Sauna passes</div>
-                            </div>
-                            <button style="color: var(--color-text-secondary);" aria-label="Sauna pass details"><i
-                                    class="ph ph-dots-three-vertical"></i></button>
-                        </div>
-
-                        <div class="doc-card">
-                            <div class="doc-icon" style="color: var(--color-status-admitted);"><i
-                                    class="ph-fill ph-identification-card"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name">Health_Waiver_2026.pdf</div>
-                                <div class="doc-meta">Verified &middot; Vault protected</div>
-                            </div>
-                            <button style="color: var(--color-text-secondary);" aria-label="Waiver options"><i
-                                    class="ph ph-dots-three-vertical"></i></button>
-                        </div>
-
-                        <div class="doc-card">
-                            <div class="doc-icon" style="color: var(--color-status-applied);"><i
-                                    class="ph-fill ph-file-pdf"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name">Gift_Voucher_Code.pdf</div>
-                                <div class="doc-meta">Active ($50 credit)</div>
-                            </div>
-                            <button style="color: var(--color-text-secondary);" aria-label="Gift voucher options"><i
-                                    class="ph ph-dots-three-vertical"></i></button>
-                        </div>
-
-                        <div class="doc-card is-missing">
-                            <div class="doc-icon" style="color: var(--color-status-reject);"><i
-                                    class="ph ph-warning-circle"></i></div>
-                            <div class="doc-main">
-                                <div class="doc-name" style="color: var(--color-status-reject);">Skin Health Disclosure
-                                </div>
-                                <div class="doc-meta">Required for custom add-ons</div>
-                            </div>
-                            <a href="#profile" class="btn btn-outline"
-                                style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Update</a>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================ SHORTLIST ============================ -->
-            <section class="dash-view" id="view-shortlist" data-title="Saved Suites &amp; Therapies" tabindex="-1">
-                <div class="dash-page-head">
-                    <div>
-                        <h2>Saved Suites &amp; Therapies</h2>
-                        <div class="sub">Your favorite float environments and hydrotherapy modalities saved for fast
-                            booking.</div>
-                    </div>
-                    <div class="dash-page-actions">
-                        <a href="services.html" class="btn btn-primary"
-                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">Browse All Suites</a>
-                    </div>
-                </div>
-
-                <div class="shortlist-grid">
-                    <div class="shortlist-card">
-                        <div class="shortlist-media">
-                            <img src="https://image.made-in-china.com/202f0j00KWakOFUnSJub/Anti-Gravity-Wet-Floatation-Floating-Sensory-Deprivation-Isolation-Meditation-Tank-Pod-SPA.webp" alt="Executive Isolation Pod">
-                            <button class="shortlist-fav" aria-label="Remove Executive Pod from saved"><i
-                                    class="ph-fill ph-heart"></i></button>
-                        </div>
-                        <div class="shortlist-body">
-                            <span class="school-board-tag">Sensory Deprivation</span>
-                            <div class="name">Executive Isolation Pod</div>
-                            <div class="meta"><i class="ph ph-map-pin"></i> Downtown Sanctuary HQ</div>
-                            <div class="meta"><i class="ph ph-wallet"></i> $79 / 60 Min Session</div>
-                            <div class="actions">
-                                <a href="services.html" class="btn btn-outline">Details</a>
-                                <a href="#applications" class="btn btn-primary">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="shortlist-card">
-                        <div class="shortlist-media">
-                            <img src="https://www.horizon-resort.com/media/cache/jadro_resize/rc/iwYJdcRP1788939751/jadroRoot/medias/671a03ce97058/bp-horizon-spa-090.jpeg" alt="Horizon Open Basin Pool">
-                            <button class="shortlist-fav" aria-label="Remove Horizon Open Basin from saved"><i
-                                    class="ph-fill ph-heart"></i></button>
-                        </div>
-                        <div class="shortlist-body">
-                            <span class="school-board-tag">Hydrotherapy</span>
-                            <div class="name">Horizon Open Basin Pool</div>
-                            <div class="meta"><i class="ph ph-map-pin"></i> Westside Studio Branch</div>
-                            <div class="meta"><i class="ph ph-wallet"></i> $89 / 60 Min Session</div>
-                            <div class="actions">
-                                <a href="services.html" class="btn btn-outline">Details</a>
-                                <a href="#applications" class="btn btn-primary">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="shortlist-card">
-                        <div class="shortlist-media">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLr6B8UxbYWyd5xdWWuZKwGwR3jnm2UJMVFlUHiPo7YIAY9Eb05TTX_DUj&s=10" alt="Couples Sanctuary Suite">
-                            <button class="shortlist-fav" aria-label="Remove Couples Sanctuary from saved"><i
-                                    class="ph-fill ph-heart"></i></button>
-                        </div>
-                        <div class="shortlist-body">
-                            <span class="school-board-tag">Double Float</span>
-                            <div class="name">Couples Sanctuary Suite</div>
-                            <div class="meta"><i class="ph ph-map-pin"></i> Downtown Sanctuary HQ</div>
-                            <div class="meta"><i class="ph ph-wallet"></i> $139 / 60 Min Session</div>
-                            <div class="actions">
-                                <a href="services.html" class="btn btn-outline">Details</a>
-                                <a href="#applications" class="btn btn-primary">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================ INTERVIEWS ============================ -->
-            <section class="dash-view" id="view-interviews" data-title="Float Reservations" tabindex="-1">
-                <div class="dash-page-head">
-                    <div>
-                        <h2>Float Reservations</h2>
-                        <div class="sub">Scheduled float sessions and spa appointments.</div>
-                    </div>
-                    <div class="dash-page-actions">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i
-                                class="ph ph-calendar-plus"></i> Add to calendar</button>
-                    </div>
-                </div>
-
-                <h3 style="font-family: var(--font-body); font-size: 1.05rem; margin-bottom: var(--space-3);">Upcoming
-                    Reservation</h3>
-
-                <div class="interview-card">
-                    <div class="interview-date">
-                        <div class="d">15</div>
-                        <div class="m">Nov</div>
-                    </div>
-                    <div class="interview-main">
-                        <h4>Executive Isolation Pod &mdash; 90 Min Sensory Float</h4>
-                        <div class="meta">
-                            <span><i class="ph ph-clock"></i> 10:30 &ndash; 12:00 PM</span>
-                            <span><i class="ph ph-map-pin"></i> Downtown Sanctuary, Suite 2</span>
-                            <span><i class="ph ph-user"></i> Guide: Alex Rivera</span>
-                        </div>
-                    </div>
-                    <span class="status-badge status-interview"><i class="ph-fill ph-hourglass-medium"></i> Awaiting
-                        confirmation</span>
-                    <button class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Confirm</button>
-                </div>
-
-                <h3 style="font-family: var(--font-body); font-size: 1.05rem; margin: var(--space-5) 0 var(--space-3);">
-                    Past Sessions</h3>
-
-                <div class="interview-card is-past">
-                    <div class="interview-date">
-                        <div class="d">28</div>
-                        <div class="m">Oct</div>
-                    </div>
-                    <div class="interview-main">
-                        <h4>Horizon Open Basin Suite &mdash; 60 Min Hydrotherapy</h4>
-                        <div class="meta">
-                            <span><i class="ph ph-clock"></i> 4:00 &ndash; 5:00 PM</span>
-                            <span><i class="ph ph-map-pin"></i> Westside Studio Branch</span>
-                        </div>
-                    </div>
-                    <span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Attended</span>
-                </div>
-
-                <div class="interview-card is-past">
-                    <div class="interview-date">
-                        <div class="d">19</div>
-                        <div class="m">Oct</div>
-                    </div>
-                    <div class="interview-main">
-                        <h4>Couples Sanctuary Suite &mdash; 60 Min Float &amp; Sauna</h4>
-                        <div class="meta">
-                            <span><i class="ph ph-clock"></i> 11:00 AM &ndash; 12:30 PM</span>
-                            <span><i class="ph ph-map-pin"></i> Downtown Sanctuary, Suite 5</span>
-                        </div>
-                    </div>
-                    <span class="status-badge status-admitted"><i class="ph-fill ph-check-circle"></i> Attended</span>
-                </div>
-            </section>
-
-            <!-- ============================= MESSAGES ============================= -->
-            <section class="dash-view" id="view-messages" data-title="Guide Messages" tabindex="-1">
-                <div class="dash-page-head">
-                    <div>
-                        <h2>Guide Messages</h2>
-                        <div class="sub">Direct communication with Solace float guides and concierge team.</div>
-                    </div>
-                </div>
-
-                <div class="messages-layout">
-                    <div class="msg-list" role="tablist" aria-label="Conversations">
-                        <button type="button" class="msg-item" role="tab" aria-pressed="true" data-thread="oakridge">
-                            <img src="https://tattvaspa.com/wp-content/uploads/2021/12/thumbnail-1.webp" alt="Downtown Concierge">
-                            <div class="msg-main">
-                                <div class="msg-who"><strong>Downtown Sanctuary</strong> <span
-                                        class="msg-when">2h</span></div>
-                                <div class="msg-preview">Please confirm your arrival time for Nov 15&hellip;</div>
-                            </div>
-                            <span class="msg-unread-dot" aria-label="Unread"></span>
-                        </button>
-
-                        <button type="button" class="msg-item" role="tab" aria-pressed="false" data-thread="stmarys">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRpxYG6bXRdmP33wbPvgbsrS8FB9xx6boVktlEkTO3ANZn7LIzbNYAOQ-J&s=10" alt="Alex Rivera">
-                            <div class="msg-main">
-                                <div class="msg-who"><strong>Guide Alex Rivera</strong> <span class="msg-when">1d</span>
-                                </div>
-                                <div class="msg-preview">We've added lavender aromatherapy to your suite prep.</div>
-                            </div>
-                            <span class="msg-unread-dot" aria-label="Unread"></span>
-                        </button>
-
-                        <button type="button" class="msg-item" role="tab" aria-pressed="false" data-thread="dps">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNiBvR-Id5SsBW4ZYzAF6UDAV6gIwVFxguWtxOWGeTCj_f8sPy5Bx622w&s=10" alt="Spa Reception">
-                            <div class="msg-main">
-                                <div class="msg-who"><strong>Spa Reception</strong> <span class="msg-when">3d</span>
-                                </div>
-                                <div class="msg-preview">Thank you &mdash; your monthly Zenith renewal has processed.
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-
-                    <div class="msg-thread">
-                        <div class="msg-thread-head">
-                           
-                            <div>
-                                <div style="font-size: 0.95rem;" data-thread-name>Downtown Sanctuary Concierge</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Concierge Team
-                                    &middot; replies within minutes</div>
-                            </div>
-                        </div>
-
-                        <div class="msg-thread-body" data-thread-body aria-live="polite"></div>
-
-                        <form class="msg-composer" data-thread-form>
-                            <input type="text" class="form-control" placeholder="Write a message to your guide&hellip;"
-                                aria-label="Message" data-thread-input>
-                            <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1rem;"
-                                aria-label="Send"><i class="ph ph-paper-plane-tilt"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================= PAYMENTS ============================= -->
-            <section class="dash-view" id="view-payments" data-title="Membership &amp; Payments" tabindex="-1">
-                <div class="dash-page-head">
-                    <div>
-                        <h2>Membership &amp; Payments</h2>
-                        <div class="sub">Float memberships, package purchases, and spa receipts.</div>
-                    </div>
-                    <div class="dash-page-actions">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i
-                                class="ph ph-download-simple"></i> Export receipts</button>
-                    </div>
-                </div>
-
-                <div class="fee-summary">
-                    <div class="fee-tile is-due">
-                        <div class="cap">Due now</div>
-                        <div class="amt">$189</div>
-                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Zenith Membership &middot;
-                            by Nov 02</div>
-                    </div>
-                    <div class="fee-tile is-paid">
-                        <div class="cap">Paid this season</div>
-                        <div class="amt">$430</div>
-                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Across 4 float sessions
-                        </div>
-                    </div>
-                    <div class="fee-tile">
-                        <div class="cap">Refundable locker deposit</div>
-                        <div class="amt">$50</div>
-                        <div style="font-size: 0.8rem; color: var(--color-text-secondary);">Released after checkout
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dash-card dash-card--flush">
-                    <h3 style="margin-bottom: var(--space-3);">Transaction History</h3>
-                    <div class="dash-table-wrapper">
-                        <table class="dash-table stack-mobile">
+                <!-- Interactive Module Checklist -->
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Studio Modules (Click to Update Status)</h3>
+                    <div class="table-responsive">
+                        <table class="dash-table">
                             <thead>
                                 <tr>
-                                    <th>Reference</th>
-                                    <th>Service / Package</th>
-                                    <th>Purpose</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
+                                    <th>Module</th>
+                                    <th>Topic &amp; Deliverable</th>
                                     <th>Status</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2026-0148</code></td>
-                                    <td data-label="Service">Zenith Monthly Membership</td>
-                                    <td data-label="Purpose">Monthly Subscription</td>
-                                    <td data-label="Date">Oct 26, 2026</td>
-                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$189.00</td>
-                                    <td data-label="Status"><span class="status-badge status-waitlist"><i
-                                                class="ph-fill ph-clock"></i> Due</span></td>
-                                    <td class="cell-action"><button class="btn btn-primary"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Pay now</button></td>
+                                    <td><strong>Module 01</strong></td>
+                                    <td>Asymmetric Bodice &amp; Princess Seam Foundations</td>
+                                    <td><span class="status-badge status-admitted">Completed</span></td>
+                                    <td><button type="button" class="btn btn-outline" data-module-toggle
+                                            data-done="true" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2026-0121</code></td>
-                                    <td data-label="Service">3-Pack Float Bundle</td>
-                                    <td data-label="Purpose">Package Purchase</td>
-                                    <td data-label="Date">Oct 15, 2026</td>
-                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$199.00</td>
-                                    <td data-label="Status"><span class="status-badge status-admitted"><i
-                                                class="ph-fill ph-check-circle"></i> Paid</span></td>
-                                    <td class="cell-action"><button class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                    <td><strong>Module 02</strong></td>
+                                    <td>Bias-Cut Silk Organza Draping &amp; French Seams</td>
+                                    <td><span class="status-badge status-admitted">Completed</span></td>
+                                    <td><button type="button" class="btn btn-outline" data-module-toggle
+                                            data-done="true" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2026-0109</code></td>
-                                    <td data-label="Service">Infrared Sauna Add-on</td>
-                                    <td data-label="Purpose">Add-on Session</td>
-                                    <td data-label="Date">Oct 12, 2026</td>
-                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$45.00</td>
-                                    <td data-label="Status"><span class="status-badge status-admitted"><i
-                                                class="ph-fill ph-check-circle"></i> Paid</span></td>
-                                    <td class="cell-action"><button class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                    <td><strong>Module 03</strong></td>
+                                    <td>Corsetry Boning &amp; Internal Couture Structure</td>
+                                    <td><span class="status-badge status-review">In Progress</span></td>
+                                    <td><button type="button" class="btn btn-primary" data-module-toggle
+                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark Complete</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="cell-primary"><code style="font-size: 0.82rem;">INV-2026-0097</code></td>
-                                    <td data-label="Service">Single 60-Min Float</td>
-                                    <td data-label="Purpose">Introductory Session</td>
-                                    <td data-label="Date">Oct 10, 2026</td>
-                                    <td data-label="Amount" style="font-variant-numeric: tabular-nums;">$79.00</td>
-                                    <td data-label="Status"><span class="status-badge status-admitted"><i
-                                                class="ph-fill ph-check-circle"></i> Paid</span></td>
-                                    <td class="cell-action"><button class="btn btn-outline"
-                                            style="padding: 0.25rem 0.75rem; font-size: 0.82rem;">Receipt</button></td>
+                                    <td><strong>Module 04</strong></td>
+                                    <td>Final Capsule Look &amp; Runway Jury Presentation</td>
+                                    <td><span class="status-badge status-review">In Progress</span></td>
+                                    <td><button type="button" class="btn btn-primary" data-module-toggle
+                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark Complete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1314,268 +1181,469 @@
                 </div>
             </section>
 
-            <!-- =========================== NOTIFICATIONS =========================== -->
+            <!-- ============================ PORTFOLIO UPLOADS ============================ -->
+            <section class="dash-view" id="view-vault" data-title="Portfolio Uploads" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Portfolio Uploads &amp; Lookbook Plates</h2>
+                        <div class="sub">Upload garment photographs, croquis illustrations, and swatch sheets for
+                            faculty review. (Previews appear live in your current browser session.)</div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Upload New Portfolio Piece</h3>
+                    <form id="portfolioUploadForm">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4);">
+                            <div class="form-group">
+                                <label class="form-label" for="portfolioTitleInput">Project / Look Title</label>
+                                <input type="text" class="form-control" id="portfolioTitleInput"
+                                    placeholder="e.g. Crimson Silk Organza Gown" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="portfolioCategoryInput">Design Discipline</label>
+                                <select class="form-control" id="portfolioCategoryInput">
+                                    <option value="Couture & Draping">Couture &amp; Draping</option>
+                                    <option value="Textile & Surface Design">Textile &amp; Surface Design</option>
+                                    <option value="Fashion Illustration">Fashion Illustration</option>
+                                    <option value="Pattern & Tailoring">Pattern &amp; Tailoring</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="portfolioFileInput">Select Portfolio Image (JPG, PNG, WEBP)</label>
+                            <input type="file" class="form-control" id="portfolioFileInput" accept="image/*" required>
+                        </div>
+
+                        <div style="display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="ph ph-upload-simple"></i> Add to My Fashion Projects
+                            </button>
+                            <a href="#shortlist" class="btn btn-outline">View Uploaded Projects</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Recent Submitted Portfolio Plates</h3>
+                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                        <div class="upload-slot">
+                            <div class="upload-slot-body">
+                                <div class="upload-slot-title"><i class="ph-fill ph-check-circle"
+                                        style="color: var(--color-status-admitted);"></i> Aurelia Look 01 — Draped
+                                    Burgundy Gown</div>
+                                <div class="upload-slot-meta">Approved by Prof. Elena Vance &middot; Uploaded Oct 24, 2026</div>
+                            </div>
+                            <a href="#shortlist" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
+                        </div>
+                        <div class="upload-slot">
+                            <div class="upload-slot-body">
+                                <div class="upload-slot-title"><i class="ph-fill ph-check-circle"
+                                        style="color: var(--color-status-admitted);"></i> Botanical Indigo Swatch
+                                    Archive</div>
+                                <div class="upload-slot-meta">Approved by Prof. Julian Moreau &middot; Uploaded Oct 18, 2026</div>
+                            </div>
+                            <a href="#shortlist" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ MY FASHION PROJECTS ============================ -->
+            <section class="dash-view" id="view-shortlist" data-title="My Fashion Projects" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>My Fashion Projects &amp; Lookbook</h2>
+                        <div class="sub">Your curated garments, textile studies, and runway portfolio pieces.</div>
+                    </div>
+                    <div class="dash-page-actions">
+                        <a href="#vault" class="btn btn-primary"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-plus"></i> Upload Look</a>
+                    </div>
+                </div>
+
+                <div class="shortlist-grid" id="portfolioProjectsGrid">
+                    <div class="shortlist-card">
+                        <div class="shortlist-img">
+                            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80"
+                                alt="Aurelia Evening Silhouette">
+                            <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
+                                    class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="badge-chip">Couture &amp; Draping</span>
+                            <h4>Aurelia — Bias-Cut Silk Gown</h4>
+                            <p class="text-muted" style="font-size: 0.85rem;">Selected for Autumn Graduate Runway</p>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-img">
+                            <img src="https://images.unsplash.com/photo-1524275539700-cf51138f679b?auto=format&fit=crop&w=700&q=80"
+                                alt="Botanical Textile Study">
+                            <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
+                                    class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="badge-chip">Textile &amp; Surface Design</span>
+                            <h4>Madder Root &amp; Raw Linen Study</h4>
+                            <p class="text-muted" style="font-size: 0.85rem;">Faculty Grade: 96% &middot; Swatch Archive</p>
+                        </div>
+                    </div>
+
+                    <div class="shortlist-card">
+                        <div class="shortlist-img">
+                            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=700&q=80"
+                                alt="Structured Wool Blazer">
+                            <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
+                                    class="ph-fill ph-heart"></i></button>
+                        </div>
+                        <div class="shortlist-body">
+                            <span class="badge-chip">Pattern &amp; Tailoring</span>
+                            <h4>Architectural Double-Breasted Coat</h4>
+                            <p class="text-muted" style="font-size: 0.85rem;">CLO 3D + Hand-Basted Canvas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ FASHION SHOWS & WORKSHOPS ============================ -->
+            <section class="dash-view" id="view-interviews" data-title="Shows &amp; Workshops" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Upcoming Fashion Shows &amp; Workshops</h2>
+                        <div class="sub">Register for runway showcases, guest designer masterclasses, and studio labs.</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                    <div class="dash-card">
+                        <div class="interview-card">
+                            <div class="interview-date-box">
+                                <div class="interview-month">NOV</div>
+                                <div class="interview-day">22</div>
+                            </div>
+                            <div class="interview-info">
+                                <h3>Autumn Graduate Runway Showcase</h3>
+                                <p><i class="ph ph-clock"></i> 6:00 PM &ndash; 9:30 PM &bull; <i
+                                        class="ph ph-map-pin"></i> Grand Runway Hall A</p>
+                                <span class="status-badge status-admitted">Model Fitting Confirmed</span>
+                            </div>
+                            <div class="interview-actions">
+                                <button type="button" class="btn btn-outline" data-event-register
+                                    data-registered="true"><i class="ph-fill ph-check-circle"></i> Registered</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="interview-card">
+                            <div class="interview-date-box">
+                                <div class="interview-month">DEC</div>
+                                <div class="interview-day">04</div>
+                            </div>
+                            <div class="interview-info">
+                                <h3>Haute Couture Tambour Beading Workshop</h3>
+                                <p><i class="ph ph-clock"></i> 2:00 PM &ndash; 5:00 PM &bull; <i
+                                        class="ph ph-map-pin"></i> Embroidery Studio C</p>
+                                <span class="status-badge status-shortlist">Open for Students</span>
+                            </div>
+                            <div class="interview-actions">
+                                <button type="button" class="btn btn-primary" data-event-register
+                                    data-registered="false">Register for Event</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="interview-card">
+                            <div class="interview-date-box">
+                                <div class="interview-month">DEC</div>
+                                <div class="interview-day">12</div>
+                            </div>
+                            <div class="interview-info">
+                                <h3>Sustainable Fibers &amp; Zero-Waste Pattern Symposium</h3>
+                                <p><i class="ph ph-clock"></i> 10:30 AM &ndash; 1:00 PM &bull; <i
+                                        class="ph ph-map-pin"></i> Textile Innovation Auditorium</p>
+                                <span class="status-badge status-shortlist">Guest Designer Keynote</span>
+                            </div>
+                            <div class="interview-actions">
+                                <button type="button" class="btn btn-primary" data-event-register
+                                    data-registered="false">Register for Event</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ FACULTY MESSAGES ============================ -->
+            <section class="dash-view" id="view-messages" data-title="Faculty Messages" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Faculty &amp; Studio Messages</h2>
+                        <div class="sub">Direct communication with your studio mentors, textile lab, and runway office.</div>
+                    </div>
+                </div>
+
+                <div class="dash-card" style="padding: 0; overflow: hidden;">
+                    <div class="msg-shell">
+                        <div class="msg-list">
+                            <button type="button" class="msg-item" data-thread="oakridge" aria-pressed="true">
+                                <img class="msg-avatar"
+                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+                                    alt="Prof. Elena Vance">
+                                <div class="msg-meta">
+                                    <div class="msg-name">Prof. Elena Vance <span class="msg-unread-dot"></span></div>
+                                    <div class="msg-preview">Your capsule piece is nominated for Runway Jury...</div>
+                                </div>
+                                <span class="msg-time">2h</span>
+                            </button>
+
+                            <button type="button" class="msg-item" data-thread="stmarys" aria-pressed="false">
+                                <img class="msg-avatar"
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+                                    alt="Prof. Julian Moreau">
+                                <div class="msg-meta">
+                                    <div class="msg-name">Prof. Julian Moreau <span class="msg-unread-dot"></span></div>
+                                    <div class="msg-preview">Bring your raw silk organza yardage tomorrow...</div>
+                                </div>
+                                <span class="msg-time">1d</span>
+                            </button>
+
+                            <button type="button" class="msg-item" data-thread="dps" aria-pressed="false">
+                                <img class="msg-avatar"
+                                    src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=200&q=80"
+                                    alt="Runway &amp; Events Office">
+                                <div class="msg-meta">
+                                    <div class="msg-name">Runway &amp; Events Office</div>
+                                    <div class="msg-preview">Your digital runway pass has been added...</div>
+                                </div>
+                                <span class="msg-time">3d</span>
+                            </button>
+                        </div>
+
+                        <div class="msg-thread">
+                            <div class="msg-thread-head">
+                                <img class="msg-avatar" data-thread-avatar
+                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+                                    alt="">
+                                <div>
+                                    <strong data-thread-name>Prof. Elena Vance — Couture Studio</strong>
+                                    <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Faculty Mentor</div>
+                                </div>
+                            </div>
+                            <div class="msg-thread-body" data-thread-body></div>
+                            <form class="msg-thread-form" data-thread-form>
+                                <input type="text" class="form-control" data-thread-input
+                                    placeholder="Write a message to your mentor..." aria-label="Message text">
+                                <button type="submit" class="btn btn-primary" aria-label="Send message">
+                                    <i class="ph ph-paper-plane-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ CERTIFICATES & TUITION ============================ -->
+            <section class="dash-view" id="view-payments" data-title="Certificates &amp; Tuition" tabindex="-1">
+                <div class="dash-page-head">
+                    <div>
+                        <h2>Certificates &amp; Tuition Ledger</h2>
+                        <div class="sub">Download verified course certificates and review semester tuition &amp; merit grants.</div>
+                    </div>
+                </div>
+
+                <div class="dash-kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                    <div class="kpi-card">
+                        <div class="kpi-icon"><i class="ph-fill ph-certificate"></i></div>
+                        <div class="kpi-info">
+                            <h4>Certificates Earned</h4>
+                            <div class="kpi-value">2</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon"
+                            style="color: var(--color-status-admitted); background: var(--color-status-admitted-bg);">
+                            <i class="ph-fill ph-graduation-cap"></i>
+                        </div>
+                        <div class="kpi-info">
+                            <h4>Merit Scholarship</h4>
+                            <div class="kpi-value">25%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom: var(--space-4);">Academic Certificates &amp; Statements</h3>
+                    <div class="table-responsive">
+                        <table class="dash-table">
+                            <thead>
+                                <tr>
+                                    <th>Record / Credential</th>
+                                    <th>Term</th>
+                                    <th>Amount / Grade</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Botanical Dyeing &amp; Surface Textiles Certificate</strong></td>
+                                    <td>Autumn 2026</td>
+                                    <td>Grade: A+ (96%)</td>
+                                    <td><span class="status-badge status-admitted">Issued</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fashion Illustration &amp; Croquis Foundations</strong></td>
+                                    <td>Spring 2026</td>
+                                    <td>Grade: A (93%)</td>
+                                    <td><span class="status-badge status-admitted">Issued</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Autumn 2026 Studio Tuition (After 25% Merit Grant)</strong></td>
+                                    <td>Aug 15, 2026</td>
+                                    <td>$3,150.00</td>
+                                    <td><span class="status-badge status-admitted">Paid</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================ NOTIFICATIONS ============================ -->
             <section class="dash-view" id="view-notifications" data-title="Notifications" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
                         <h2>Notifications</h2>
-                        <div class="sub">Everything that has occurred regarding your sessions, vouchers, and spa news.
+                        <div class="sub">Runway fitting alerts, faculty critiques, and workshop updates.</div>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <div class="notif-list">
+                        <div class="notif-item is-unread">
+                            <div class="notif-icon" style="background: var(--color-status-admitted-bg); color: var(--color-status-admitted);">
+                                <i class="ph-fill ph-sparkle"></i>
+                            </div>
+                            <div class="notif-body">
+                                <strong>Graduate Runway Jury Nomination</strong>
+                                <p>Prof. Elena Vance nominated your "Aurelia" silk organza look for the Nov 22 Autumn Runway Showcase.</p>
+                                <span class="notif-time">2 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="notif-item is-unread">
+                            <div class="notif-icon" style="background: var(--color-status-interview-bg); color: var(--color-status-interview);">
+                                <i class="ph-fill ph-calendar-star"></i>
+                            </div>
+                            <div class="notif-body">
+                                <strong>Workshop Registration Open: Tambour Beading</strong>
+                                <p>Limited to 16 atelier benches on Dec 4. Reserve your seat in the Shows &amp; Workshops tab.</p>
+                                <span class="notif-time">1 day ago</span>
+                            </div>
+                        </div>
+
+                        <div class="notif-item">
+                            <div class="notif-icon" style="background: var(--color-accent-tint); color: var(--color-brand-accent);">
+                                <i class="ph-fill ph-certificate"></i>
+                            </div>
+                            <div class="notif-body">
+                                <strong>Certificate Issued: Botanical Dyeing</strong>
+                                <p>Your digital credential for FDI-205 is now available under Certificates &amp; Tuition.</p>
+                                <span class="notif-time">4 days ago</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="dash-page-actions">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Mark all as
-                            read</button>
-                    </div>
-                </div>
-
-                <div class="notif-item is-unread">
-                    <div class="notif-icon"
-                        style="background: var(--color-status-interview-bg); color: var(--color-status-interview);"><i
-                            class="ph-fill ph-calendar-check"></i></div>
-                    <div class="notif-main">
-                        <div class="t">Float session confirmed at Downtown Sanctuary</div>
-                        <div class="d">Nov 15, 10:30 AM in Pod #02. Please confirm arrival time.</div>
-                    </div>
-                    <span class="notif-when">2 hours ago</span>
-                </div>
-
-                <div class="notif-item is-unread">
-                    <div class="notif-icon"
-                        style="background: var(--color-status-reject-bg); color: var(--color-status-reject);"><i
-                            class="ph-fill ph-warning-circle"></i></div>
-                    <div class="notif-main">
-                        <div class="t">Skin preference disclosure needed</div>
-                        <div class="d">Please update your sensory preferences for custom magnesium add-ons.</div>
-                    </div>
-                    <span class="notif-when">1 day ago</span>
-                </div>
-
-                <div class="notif-item">
-                    <div class="notif-icon"
-                        style="background: var(--color-status-review-bg); color: var(--color-status-review);"><i
-                            class="ph-fill ph-floppy-disk"></i></div>
-                    <div class="notif-main">
-                        <div class="t">Zenith monthly float credit added to vault</div>
-                        <div class="d">2 fresh float credits are now active in your profile.</div>
-                    </div>
-                    <span class="notif-when">3 days ago</span>
-                </div>
-
-                <div class="notif-item">
-                    <div class="notif-icon"
-                        style="background: var(--color-status-admitted-bg); color: var(--color-status-admitted);"><i
-                            class="ph-fill ph-shield-check"></i></div>
-                    <div class="notif-main">
-                        <div class="t">Post-float reflection journal saved</div>
-                        <div class="d">Your mental recovery score was logged as 96%.</div>
-                    </div>
-                    <span class="notif-when">5 days ago</span>
-                </div>
-
-                <div class="notif-item">
-                    <div class="notif-icon"
-                        style="background: var(--color-status-applied-bg); color: var(--color-status-applied);"><i
-                            class="ph-fill ph-receipt"></i></div>
-                    <div class="notif-main">
-                        <div class="t">Payment receipt generated</div>
-                        <div class="d">$199.00 receipt for 3-Pack Float Bundle is available.</div>
-                    </div>
-                    <span class="notif-when">Oct 15</span>
                 </div>
             </section>
 
-            <!-- ============================== PROFILE ============================== -->
-            <section class="dash-view" id="view-profile" data-title="Guest Profile &amp; Preferences" tabindex="-1">
+            <!-- ============================ STUDENT PROFILE ============================ -->
+            <section class="dash-view" id="view-profile" data-title="Student Profile" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
-                        <h2>Guest Profile &amp; Preferences</h2>
-                        <div class="sub">Set up your personal float settings, sound choices, and health disclosures.
-                        </div>
-                    </div>
-                    <div class="dash-page-actions">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Save
-                            changes</button>
-                    </div>
-                </div>
-
-                <div class="profile-hero">
-                    <div class="profile-avatar-wrapper"
-                        style="position: relative; width: 72px; height: 72px; flex-shrink: 0;">
-                        <img src="https://arththaispathane.co.in/services/1.png"
-                            alt="Dr. Sarah Jenkins" class="profile-avatar-img"
-                            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-brand-secondary); box-shadow: var(--shadow-soft);">
-                        <span
-                            style="position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: #52B69A; border: 2px solid var(--color-bg-primary); border-radius: 50%;"
-                            title="Active Member"></span>
-                    </div>
-                    <div style="flex: 1; min-width: 200px;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-text-primary);">Dr. Sarah
-                            Jenkins</div>
-                        <div style="font-size: 0.875rem; color: var(--color-text-secondary); margin-top: 0.2rem;">Zenith
-                            Spa Member &middot; Joined March 2026</div>
-                    </div>
-                    <button class="btn btn-outline" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;"><i
-                            class="ph ph-camera"></i> Change photo</button>
-                </div>
-
-                <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-4);">Guest Contact Information</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label class="form-label" for="pfFirst">First name</label>
-                            <input class="form-control" id="pfFirst" type="text" value="Sarah">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="pfLast">Last name</label>
-                            <input class="form-control" id="pfLast" type="text" value="Jenkins">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="pfEmail">Email</label>
-                            <input class="form-control" id="pfEmail" type="email" value="sarah.j@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="pfPhone">Phone</label>
-                            <input class="form-control" id="pfPhone" type="tel" value="+1 (800) 555-FLOAT">
-                        </div>
-                        <div class="form-group is-wide">
-                            <label class="form-label" for="pfAddress">Residential address</label>
-                            <input class="form-control" id="pfAddress" type="text"
-                                value="742 Ocean View Dr, Wellness City, CA 90210">
-                        </div>
+                        <h2>Student Profile &amp; Atelier Preferences</h2>
+                        <div class="sub">Manage your academic details, design specialization, and studio bio.</div>
                     </div>
                 </div>
 
                 <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-4);">Float Preferences &amp; Sensory Settings</h3>
-                    <div class="form-grid">
+                    <form id="studentProfileForm">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4);">
+                            <div class="form-group">
+                                <label class="form-label" for="profName">Full Name</label>
+                                <input type="text" class="form-control" id="profName" value="Aria Kapoor">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profId">Student ID</label>
+                                <input type="text" class="form-control" id="profId" value="FDI-2026-0418" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profEmail">Institute Email</label>
+                                <input type="email" class="form-control" id="profEmail" value="aria.kapoor@atelia.edu">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profTrack">Primary Specialization</label>
+                                <select class="form-control" id="profTrack">
+                                    <option selected>Haute Couture &amp; Draping</option>
+                                    <option>Textile &amp; Surface Design</option>
+                                    <option>Pattern Engineering &amp; CLO 3D</option>
+                                    <option>Fashion Styling &amp; Editorial</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label class="form-label" for="cdName">Preferred Float Environment</label>
-                            <select class="form-control" id="cdName">
-                                <option selected>Executive Isolation Pod</option>
-                                <option>Horizon Open Basin Pool</option>
-                                <option>Couples Sanctuary Suite</option>
-                            </select>
+                            <label class="form-label" for="profBio">Designer Statement</label>
+                            <textarea class="form-control" id="profBio" rows="3">Final-year B.Des fellow exploring architectural silk draping, botanical dyeing, and zero-waste eveningwear silhouettes.</textarea>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cdDob">Audio Soundscape</label>
-                            <select class="form-control" id="cdDob">
-                                <option selected>Binaural Theta Waves (432Hz)</option>
-                                <option>Gentle Rain &amp; Ocean Waves</option>
-                                <option>Total Silence (Complete Deprivation)</option>
-                            </select>
+
+                        <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+                            <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+                            <span id="profileSaveStatus" style="color: var(--color-status-admitted); font-size: 0.875rem; font-weight: 600;" hidden>
+                                <i class="ph-fill ph-check-circle"></i> Profile updated for this session
+                            </span>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cdGrade">Lighting Ambient Mode</label>
-                            <select class="form-control" id="cdGrade">
-                                <option>Total Darkness</option>
-                                <option selected>Starry Night Sky LED</option>
-                                <option>Soft Cyan Glow</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cdSchool">Earplug Type</label>
-                            <input class="form-control" id="cdSchool" type="text" value="Soft Silicone Moldable">
-                        </div>
-                        <div class="form-group is-wide">
-                            <label class="form-label" for="cdNotes">Health notes or skin sensitivities</label>
-                            <textarea class="form-control" id="cdNotes"
-                                rows="3">Mild skin dryness — prefers warm freshwater rinse after float.</textarea>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </section>
 
-            <!-- ============================== SETTINGS ============================== -->
+            <!-- ============================ SETTINGS ============================ -->
             <section class="dash-view" id="view-settings" data-title="Settings" tabindex="-1">
                 <div class="dash-page-head">
                     <div>
-                        <h2>Settings</h2>
-                        <div class="sub">Control how Solace Spa contacts you and manage account security.</div>
+                        <h2>Portal Settings</h2>
+                        <div class="sub">Control portfolio visibility, workshop reminders, and display preferences.</div>
                     </div>
                 </div>
 
                 <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-2);">Notifications</h3>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Session status &amp; preparation updates</div>
-                            <div class="d">Email me whenever a float suite status is prepared or updated.</div>
-                        </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="true"
-                            aria-label="Session status updates"></button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Float session reminders</div>
-                            <div class="d">A reminder SMS 24 hours before each scheduled float reservation.</div>
-                        </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="true"
-                            aria-label="Float reminders"></button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Credit expiration warnings</div>
-                            <div class="d">Alert me 10 days before any rollover credit expires.</div>
-                        </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="true"
-                            aria-label="Expiration warnings"></button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Wellness tips &amp; special offers</div>
-                            <div class="d">Occasional guide recommendations and seasonal spa packages.</div>
-                        </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="false"
-                            aria-label="Wellness tips"></button>
-                    </div>
-                </div>
-
-                <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-2);">Privacy &amp; Security</h3>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Share preferences with float guides</div>
-                            <div class="d">Allow float guides to view your sound and lighting choices prior to arrival.
+                    <div class="settings-list">
+                        <div class="setting-row">
+                            <div>
+                                <strong>Public Graduate Lookbook Visibility</strong>
+                                <p>Allow industry recruiters and runway jury members to view your approved portfolio looks.</p>
                             </div>
+                            <button type="button" class="switch" role="switch" aria-pressed="true"
+                                aria-label="Toggle public lookbook visibility"></button>
                         </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="true"
-                            aria-label="Share preferences"></button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Two-factor authentication</div>
-                            <div class="d">Require a SMS verification code when signing in.</div>
+                        <div class="setting-row">
+                            <div>
+                                <strong>Runway &amp; Workshop SMS Alerts</strong>
+                                <p>Receive backstage fitting reminders and open workshop seat notifications.</p>
+                            </div>
+                            <button type="button" class="switch" role="switch" aria-pressed="true"
+                                aria-label="Toggle workshop alerts"></button>
                         </div>
-                        <button type="button" class="switch" role="switch" aria-pressed="true"
-                            aria-label="Two-factor authentication"></button>
-                    </div>
-                </div>
-
-                <div class="dash-card">
-                    <h3 style="margin-bottom: var(--space-2);">Account Management</h3>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Change password</div>
-                            <div class="d">Last changed 2 months ago.</div>
+                        <div class="setting-row">
+                            <div>
+                                <strong>Faculty Critique Digest</strong>
+                                <p>Weekly summary of studio grades and module feedback.</p>
+                            </div>
+                            <button type="button" class="switch" role="switch" aria-pressed="false"
+                                aria-label="Toggle weekly digest"></button>
                         </div>
-                        <button class="btn btn-outline"
-                            style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Update</button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t">Download my spa history</div>
-                            <div class="d">A copy of your float logs, receipt history, and wellness notes.</div>
-                        </div>
-                        <button class="btn btn-outline"
-                            style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Request</button>
-                    </div>
-                    <div class="settings-row">
-                        <div>
-                            <div class="t" style="color: var(--color-status-reject);">Cancel membership</div>
-                            <div class="d">Pause or cancel your active Zenith membership.</div>
-                        </div>
-                        <button class="btn btn-outline"
-                            style="padding: 0.4rem 0.9rem; font-size: 0.85rem; color: var(--color-status-reject); border-color: var(--color-status-reject);">Cancel</button>
                     </div>
                 </div>
             </section>
@@ -1586,24 +1654,6 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/parent-dashboard.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebarClose = document.getElementById('sidebarClose');
-            const dashboardSidebar = document.getElementById('dashboardSidebar');
-
-            if (window.innerWidth < 992) {
-                if (sidebarToggle) sidebarToggle.style.display = 'block';
-                if (sidebarClose) sidebarClose.style.display = 'block';
-            }
-
-            if (sidebarClose && dashboardSidebar) {
-                sidebarClose.addEventListener('click', () => {
-                    dashboardSidebar.classList.remove('open');
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>

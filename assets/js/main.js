@@ -1,5 +1,5 @@
 /*
-  Solace Float Spa - Main Global Scripts
+  Fashion Designing Institute - Main Global Scripts
 */
 
 // Flagged synchronously so the reveal styles only ever apply when JS is live.
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggles = document.querySelectorAll('.theme-toggle');
   
   // Check for saved theme preference or system preference
-  const savedTheme = localStorage.getItem('solace-theme');
+  const savedTheme = localStorage.getItem('fdi-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
   if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       
       document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('solace-theme', newTheme);
+      localStorage.setItem('fdi-theme', newTheme);
       updateThemeIcons(newTheme);
     });
   });

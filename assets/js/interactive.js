@@ -1,10 +1,10 @@
 /*
-  Solace Float Spa - Interactive Sanctuary Tools
+  Fashion Designing Institute - Interactive Atelier Tools
 
   Three self-contained modules:
-    #matchFinder       (index.html)  live float suite recommender
-    #costEstimator     (home2.html)  float package fee estimator
-    #milestoneTimeline (about.html)  sanctuary story milestones
+    #matchFinder       (index.html)  live fashion program recommender
+    #costEstimator     (home2.html)  tuition & studio kit estimator
+    #milestoneTimeline (about.html)  institute heritage milestones
 */
 
 (function () {
@@ -94,7 +94,7 @@
     el._raf = requestAnimationFrame(tick);
   }
 
-  // ------------------------------------------------- 1. Float Session Recommender
+  // ------------------------------------------------- 1. Fashion Program Recommender
 
   function initMatchFinder() {
     const root = document.getElementById('matchFinder');
@@ -102,78 +102,78 @@
 
     const img = (id, w) => id.startsWith('http') ? id : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-    const SUITES = [
-      { name: 'Executive Zero-Gravity Pod Suite', area: 'Downtown Sanctuary', board: 'Pod', fee: 79, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['academics', 'sports', 'boarding'], rating: 4.9, photo: 'https://www.humantouch.com/cdn/shop/files/gravis-zg-chair-5048249.jpg?v=1760472287&width=1440' },
-      { name: 'Horizon Open Basin Suite', area: 'Westside Studio', board: 'Open', fee: 105, grades: ['early', 'primary', 'middle'], strengths: ['academics', 'arts'], rating: 4.95, photo: 'https://floatspa.com/wp-content/uploads/2020/04/Float-tank-Soulex-1024x681.jpg' },
-      { name: 'Float + Infrared Sauna Ritual', area: 'Downtown Sanctuary', board: 'Sauna', fee: 110, grades: ['primary', 'middle', 'senior'], strengths: ['sports', 'arts', 'boarding'], rating: 4.88, photo: 'https://static.wixstatic.com/media/f8ac2b_1d6b50c2ef5f4309b5b0f1383974bb81~mv2.jpg/v1/fill/w_2500,h_1667,al_c/f8ac2b_1d6b50c2ef5f4309b5b0f1383974bb81~mv2.jpg' },
-      { name: 'Couples Sanctuary Double Suite', area: 'Westside Studio', board: 'Couples', fee: 140, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['arts', 'academics'], rating: 4.92, photo: 'https://images.squarespace-cdn.com/content/v1/61f9c3e9468e396b8c21d87f/1692058264991-UN4S10OTD2VBFP4400R9/CC_OCT22_60.jpg' },
-      { name: 'Red Light & Hydro-Massage Suite', area: 'Downtown Sanctuary', board: 'Pod', fee: 65, grades: ['early', 'primary'], strengths: ['academics', 'transport'], rating: 4.75, photo: 'https://www.extremesuntanning.com/images/red-light-therapy-buffalo-ny.webp' },
-      { name: 'Deep Rest 90-Min Isolation Pod', area: 'Westside Studio', board: 'Pod', fee: 95, grades: ['middle', 'senior'], strengths: ['sports', 'boarding'], rating: 4.85, photo: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/9f/98/08/lobby-registration-and.jpg?w=1100&h=1100&s=1' }
+    const PROGRAMS = [
+      { name: 'B.Des in Fashion Design & Couture', area: 'Main Atelier Campus', board: 'Couture', fee: 4200, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['academics', 'arts', 'boarding'], rating: 4.95, photo: 'photo-1558769132-cb1aea458c5e' },
+      { name: 'Textile Design & Sustainable Weaving', area: 'Textile Research Wing', board: 'Textile', fee: 3600, grades: ['early', 'primary', 'middle'], strengths: ['academics', 'arts'], rating: 4.9, photo: 'photo-1524275539700-cf51138f679b' },
+      { name: 'Pattern Making & Garment Construction', area: 'Tailoring Studio B', board: 'Pattern', fee: 3100, grades: ['primary', 'middle', 'senior'], strengths: ['sports', 'arts', 'boarding'], rating: 4.88, photo: 'photo-1556905055-8f358a7a47b2' },
+      { name: 'Luxury Fashion Styling & Editorial', area: 'Runway & Media Wing', board: 'Styling', fee: 2950, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['arts', 'academics'], rating: 4.92, photo: 'photo-1509631179647-0177331693ae' },
+      { name: 'Fashion Illustration & 3D CLO CAD', area: 'Digital Design Lab', board: 'Couture', fee: 2450, grades: ['early', 'primary'], strengths: ['academics', 'transport'], rating: 4.82, photo: 'photo-1512436991641-6745cdb1723f' },
+      { name: 'Bridal & Eveningwear Atelier Diploma', area: 'Main Atelier Campus', board: 'Couture', fee: 3900, grades: ['middle', 'senior'], strengths: ['sports', 'boarding'], rating: 4.91, photo: 'photo-1490481651871-ab68de25d43d' }
     ];
 
     const out = readouts(root);
     const budgetInput = root.querySelector('#budgetRange');
     let budget = Number(budgetInput.value);
 
-    const score = (suite, state) => {
-      let points = 65;
-      if (state.board.length) points += state.board.includes(suite.board) ? 25 : -15;
-      const headroom = (budget - suite.fee) / budget;
+    const score = (program, state) => {
+      let points = 68;
+      if (state.board.length) points += state.board.includes(program.board) ? 22 : -12;
+      const headroom = (budget - program.fee) / budget;
       points += Math.max(-15, Math.min(15, headroom * 20));
-      points += (suite.rating - 4.5) * 10;
+      points += (program.rating - 4.5) * 10;
       return Math.max(25, Math.min(99, Math.round(points)));
     };
 
     const render = (state) => {
-      const matches = SUITES
+      const matches = PROGRAMS
         .filter(s => s.fee <= budget)
         .filter(s => !state.board.length || state.board.includes(s.board))
-        .map(s => ({ school: s, match: score(s, state) }))
+        .map(s => ({ program: s, match: score(s, state) }))
         .sort((a, b) => b.match - a.match);
 
-      out.board.textContent = state.board.length ? state.board.join(', ') : 'Any Suite';
+      out.board.textContent = state.board.length ? state.board.join(', ') : 'All Disciplines';
       out.priorities.textContent = state.priority.length
         ? state.priority.length + ' selected'
         : 'Pick any';
       out.budget.textContent = money(budget);
       out.count.textContent = matches.length === 1
-        ? '1 Suite Match'
-        : matches.length + ' Suite Matches';
+        ? '1 Program Match'
+        : matches.length + ' Program Matches';
 
       if (!matches.length) {
         out.stage.innerHTML =
-          '<div class="empty-state"><i class="ph ph-drop" style="font-size:1.75rem;display:block;margin-bottom:.5rem;"></i>' +
-          'No float suites fit those budget constraints. Increase your session budget ceiling.</div>';
+          '<div class="empty-state"><i class="ph ph-scissors" style="font-size:1.75rem;display:block;margin-bottom:.5rem;"></i>' +
+          'No fashion programs fit that semester tuition ceiling. Increase your tuition budget slider.</div>';
         return;
       }
 
       const [top, ...rest] = matches;
 
       const hero = `
-        <a class="match-hero" href="parent-dashboard.html">
-          <img src="${img(top.school.photo, 800)}" alt="${escapeHTML(top.school.name)}">
+        <a class="match-hero" href="services.html">
+          <img src="${img(top.program.photo, 800)}" alt="${escapeHTML(top.program.name)}">
           <div class="match-hero-top">
-            <span class="match-hero-board">${escapeHTML(top.school.board)}</span>
+            <span class="match-hero-board">${escapeHTML(top.program.board)}</span>
             <div class="match-score" style="--score:${top.match};">
               <span>${top.match}%<small>MATCH</small></span>
             </div>
           </div>
           <div class="match-hero-body">
-            <h3>${escapeHTML(top.school.name)}</h3>
+            <h3>${escapeHTML(top.program.name)}</h3>
             <div class="match-hero-meta">
-              <span><i class="ph-fill ph-map-pin"></i> ${escapeHTML(top.school.area)}</span>
-              <span><i class="ph-fill ph-star" style="color:#F59E0B;"></i> ${top.school.rating}</span>
-              <span><i class="ph ph-drop"></i> ${money(top.school.fee)}/session</span>
+              <span><i class="ph-fill ph-map-pin"></i> ${escapeHTML(top.program.area)}</span>
+              <span><i class="ph-fill ph-star" style="color:#C5A46D;"></i> ${top.program.rating}</span>
+              <span><i class="ph ph-graduation-cap"></i> ${money(top.program.fee)}/term</span>
             </div>
           </div>
         </a>`;
 
-      const runners = rest.slice(0, 2).map(({ school, match }) => `
-        <a class="match-runner" href="parent-dashboard.html">
-          <img src="${img(school.photo, 200)}" alt="${escapeHTML(school.name)}" loading="lazy">
+      const runners = rest.slice(0, 2).map(({ program, match }) => `
+        <a class="match-runner" href="services.html">
+          <img src="${img(program.photo, 200)}" alt="${escapeHTML(program.name)}" loading="lazy">
           <div class="match-runner-main">
-            <div class="name">${escapeHTML(school.name)}</div>
-            <div class="meta">${escapeHTML(school.board)} &middot; ${escapeHTML(school.area)} &middot; ${money(school.fee)}</div>
+            <div class="name">${escapeHTML(program.name)}</div>
+            <div class="meta">${escapeHTML(program.board)} &middot; ${escapeHTML(program.area)} &middot; ${money(program.fee)}</div>
           </div>
           <span class="pct">${match}%</span>
         </a>
@@ -187,47 +187,47 @@
     render(state);
   }
 
-  // ---------------------------------------------- 2. Float Package Fee Estimator
+  // ---------------------------------------------- 2. Tuition & Studio Fee Estimator
 
   function initCostEstimator() {
     const root = document.getElementById('costEstimator');
     if (!root) return;
 
     const BOARDS = {
-      cbse: { label: 'Executive Pod', tuition: 79 },
-      icse: { label: 'Open Basin', tuition: 95 },
-      ib: { label: 'Float + Sauna', tuition: 110 },
-      state: { label: 'Couples Suite', tuition: 140 }
+      cbse: { label: 'Couture Design', tuition: 3800 },
+      icse: { label: 'Textile & Print', tuition: 3400 },
+      ib: { label: 'Pattern & Draping', tuition: 3100 },
+      state: { label: 'Fashion Styling', tuition: 2800 }
     };
 
     const GRADES = {
-      primary: { label: '60 Minutes', factor: 1.00 },
-      middle: { label: '90 Minutes', factor: 1.30 },
-      senior: { label: '120 Minutes', factor: 1.60 }
+      primary: { label: 'Certificate (6 Mo)', factor: 1.00 },
+      middle: { label: 'Diploma (1 Yr)', factor: 1.25 },
+      senior: { label: 'B.Des Degree (3 Yr)', factor: 1.50 }
     };
 
     const CITIES = {
-      metro: { label: 'Single Float', factor: 1.00 },
-      tier2: { label: '3-Pack Bundle', factor: 0.85 },
-      tier3: { label: 'Monthly Pass', factor: 0.70 }
+      metro: { label: 'Full-Time Studio', factor: 1.00 },
+      tier2: { label: 'Hybrid Atelier', factor: 0.88 },
+      tier3: { label: 'Weekend Intensive', factor: 0.72 }
     };
 
     const ADDONS = {
-      transport: { label: 'Infrared Sauna', cost: 35 },
-      meals: { label: 'Red Light', cost: 25 },
-      boarding: { label: 'Elixir Tea', cost: 10 }
+      transport: { label: 'CLO 3D & CAD Suite', cost: 240 },
+      meals: { label: 'Runway Jury Pass', cost: 180 },
+      boarding: { label: 'Lookbook Shoot', cost: 150 }
     };
 
     const SEGMENTS = [
-      { key: 'tuition', label: 'Float Suite', color: '#1A6B72' },
-      { key: 'admission', label: 'Magnesium & Spa Kit', color: '#52B69A' },
-      { key: 'materials', label: 'Lounge Elixir', color: '#4A9E9B' },
-      { key: 'addons', label: 'Add-ons', color: '#2563EB' }
+      { key: 'tuition', label: 'Program Tuition', color: '#651C32' },
+      { key: 'admission', label: 'Atelier Sewing Kit', color: '#C5A46D' },
+      { key: 'materials', label: 'Textile Allowance', color: '#D9A6A8' },
+      { key: 'addons', label: 'Studio Add-ons', color: '#292326' }
     ];
 
     const out = readouts(root);
     const siblingInput = root.querySelector('#siblingRange');
-    let sessions = Number(siblingInput ? siblingInput.value : 1);
+    let semesters = Number(siblingInput ? siblingInput.value : 1);
     let lastTotal = 0;
 
     const render = (state) => {
@@ -238,22 +238,22 @@
 
       const parts = {
         tuition: board.tuition * scale,
-        admission: 10,
-        materials: 5,
+        admission: 320,
+        materials: 260,
         addons: state.addon ? state.addon.reduce((sum, key) => sum + (ADDONS[key] ? ADDONS[key].cost : 0), 0) : 0
       };
 
-      const perSession = Object.values(parts).reduce((a, b) => a + b, 0);
+      const perSemester = Object.values(parts).reduce((a, b) => a + b, 0);
 
-      const multipliers = [1, 0.90, 0.82, 0.75].slice(0, sessions);
-      const gross = perSession * sessions;
-      const total = perSession * multipliers.reduce((a, b) => a + b, 0);
+      const multipliers = [1, 0.92, 0.86, 0.80].slice(0, semesters);
+      const gross = perSemester * semesters;
+      const total = perSemester * multipliers.reduce((a, b) => a + b, 0);
       const savings = gross - total;
 
       out.board.textContent = board.label;
       out.grade.textContent = grade.label;
       out.city.textContent = city.label;
-      if (out.children) out.children.textContent = String(sessions);
+      if (out.children) out.children.textContent = String(semesters);
       if (out.addons) out.addons.textContent = state.addon && state.addon.length
         ? state.addon.map(k => ADDONS[k] ? ADDONS[k].label : k).join(', ')
         : 'None';
@@ -261,7 +261,7 @@
       animateNumber(out.total, lastTotal, total, money, 600);
       lastTotal = total;
 
-      if (out.permonth) out.permonth.textContent = `Includes private rain shower & post-float tea lounge across ${sessions} float session(s).`;
+      if (out.permonth) out.permonth.textContent = `Includes industrial sewing lab access, dress forms & textile library across ${semesters} semester(s).`;
 
       out.bar.innerHTML = SEGMENTS
         .map(seg => `<div class="cost-seg" style="background:${seg.color};" data-key="${seg.key}"></div>`)
@@ -269,7 +269,7 @@
 
       requestAnimationFrame(() => {
         out.bar.querySelectorAll('.cost-seg').forEach(el => {
-          const share = gross ? (parts[el.dataset.key] * sessions / gross) * 100 : 0;
+          const share = gross ? (parts[el.dataset.key] * semesters / gross) * 100 : 0;
           el.style.width = share + '%';
         });
       });
@@ -278,22 +278,22 @@
         <div class="cost-legend-item">
           <span class="cost-swatch" style="background:${seg.color};"></span>
           <span>${seg.label}</span>
-          <span class="amount">${money(parts[seg.key] * sessions)}</span>
+          <span class="amount">${money(parts[seg.key] * semesters)}</span>
         </div>
       `).join('');
 
       out.savings.textContent = '−' + money(savings);
-      out.savingsnote.textContent = sessions > 1
-        ? `${sessions - 1} multi-float discount applied`
-        : 'Add multiple floats to save up to 25%';
+      out.savingsnote.textContent = semesters > 1
+        ? `${semesters - 1} multi-term merit grant applied`
+        : 'Enroll in multiple terms to unlock up to 20% merit grant';
     };
 
     const state = chipGroups(root, render);
-    rangeControl(siblingInput, (value) => { sessions = value; render(state); });
+    rangeControl(siblingInput, (value) => { semesters = value; render(state); });
     render(state);
   }
 
-  // ------------------------------------------------ 3. Milestone Timeline
+  // ------------------------------------------------ 3. Institute Heritage Milestones
 
   function initMilestoneTimeline() {
     const root = document.getElementById('milestoneTimeline');
@@ -301,32 +301,32 @@
 
     const MILESTONES = {
       2019: {
-        title: 'Founding of Solace Float Spa',
-        body: 'Our founder opened our first sanctuary with two handcrafted isolation float pods, dedicated to introducing the restorative power of zero-gravity sensory deprivation.',
-        stats: [['2', 'float pods'], ['1,000 lbs', 'Epsom salt per pod']],
-        img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80',
-        alt: 'Founding float spa suite'
+        title: 'Founding of the Fashion Atelier',
+        body: 'Master couturiers and textile educators established Fashion Designing Institute with two draping studios, dedicating the curriculum to hands-on craftsmanship and contemporary silhouette innovation.',
+        stats: [['2', 'draping studios'], ['45', 'founding fellows']],
+        img: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80',
+        alt: 'Fashion design atelier studio'
       },
       2021: {
-        title: 'UV & Ozone Filtration Upgrade',
-        body: 'Pioneered 100% dual UV and ozone water purification systems between every single guest float, setting the highest hygiene standard in sensory hydrotherapy.',
-        stats: [['100%', 'purified water'], ['0', 'chemical odor']],
-        img: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=80',
-        alt: 'Pristine float pool water'
+        title: 'International Runway & Milan Exchange',
+        body: 'Launched our annual student runway showcase and international studio exchange, connecting graduating designers with European pattern houses and luxury editorial directors.',
+        stats: [['18', 'runway collections'], ['100%', 'jury placement']],
+        img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80',
+        alt: 'Student fashion runway showcase'
       },
       2023: {
-        title: 'Infrared & Red Light Integration',
-        body: 'Expanded our wellness offerings to include full-spectrum infrared saunas and red light therapy rooms to pair with sensory floatation.',
-        stats: [['15,000+', 'floats hosted'], ['4.98/5', 'guest rating']],
-        img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80',
-        alt: 'Infrared sauna suite'
+        title: 'Sustainable Textile & 3D CLO Lab',
+        body: 'Opened our zero-waste textile dye laboratory and digital 3D garment simulation suite, empowering students to prototype couture silhouettes sustainably.',
+        stats: [['1,200+', 'graduates placed'], ['4.96/5', 'industry rating']],
+        img: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&q=80',
+        alt: 'Garment construction and textile workshop'
       },
       2026: {
-        title: 'Sanctuary Expansion',
-        body: 'Today Solace Float Spa operates premier sanctuaries offering executive pods, open horizon pools, and member sanctuary portals.',
-        stats: [['2', 'sanctuary locations'], ['99.4%', 'stress relief rate']],
-        img: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80',
-        alt: 'Modern float spa lounge'
+        title: 'Global Fashion Design Campus',
+        body: 'Today Fashion Designing Institute hosts six specialized studios, an archival textile library, and an integrated student portfolio and runway registration portal.',
+        stats: [['6', 'specialized ateliers'], ['96%', 'career placement']],
+        img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80',
+        alt: 'Contemporary fashion exhibition gallery'
       }
     };
 

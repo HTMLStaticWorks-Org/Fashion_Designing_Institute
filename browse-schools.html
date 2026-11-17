@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services &amp; Therapies | Solace Float Spa</title>
+    <title>Gallery &amp; Student Collections | Atelia</title>
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <meta name="description"
-        content="Explore sensory deprivation float suites, open pools, infrared saunas, red light therapy, and wellness add-ons at Solace Float Spa.">
+        content="Explore student fashion collections, annual runway shows, editorial fashion photography, exhibitions, and behind-the-scenes atelier work.">
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,7 +15,6 @@
 
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
     <style>
         .directory-layout {
             display: flex;
@@ -126,6 +125,168 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            text-align: left;
+        }
+
+        .school-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+            border-top: 1px solid var(--color-border);
+            padding-top: 0.75rem;
+        }
+
+        .school-card-footer .card-price {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .school-card-footer .card-price small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .school-card-footer .btn {
+            flex-shrink: 0;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .directory-search-wrapper {
+            background: var(--color-bg-secondary);
+            padding: var(--space-4);
+            border-radius: var(--radius-soft);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-soft);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .directory-search-inner {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+        }
+
+        .directory-search-field {
+            flex: 1;
+            min-width: 240px;
+            position: relative;
+        }
+
+        .directory-search-field .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-brand-secondary);
+            font-size: 1.25rem;
+            pointer-events: none;
+        }
+
+        .directory-search-field input.form-control {
+            padding-left: 48px;
+            height: 48px;
+            border-radius: var(--radius-soft);
+            font-size: 0.95rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .directory-search-select {
+            width: auto;
+            min-width: 180px;
+            height: 48px;
+            border-radius: var(--radius-soft);
+            box-sizing: border-box;
+        }
+
+        .directory-search-btn {
+            height: 48px;
+            padding: 0 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .directory-layout {
+                flex-direction: column;
+                gap: var(--space-6);
+            }
+
+            .filter-sidebar {
+                width: 100%;
+                position: static;
+                max-height: none;
+                padding: var(--space-4);
+            }
+
+            .directory-search-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-3);
+            }
+
+            .directory-search-field,
+            .directory-search-select,
+            .directory-search-btn {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .directory-search-wrapper {
+                padding: var(--space-3);
+            }
+
+            .directory-search-field input.form-control {
+                font-size: 0.875rem;
+                height: 44px;
+                padding-left: 42px;
+            }
+
+            .directory-search-field .search-icon {
+                left: 14px;
+                font-size: 1.1rem;
+            }
+
+            .directory-search-select,
+            .directory-search-btn {
+                height: 44px;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Center the 3rd card on tablet view (2-column row + centered 3rd card) */
+        @media (min-width: 600px) and (max-width: 991.98px) {
+            .services-features-grid,
+            .bts-atelier-grid {
+                display: flex !important;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--space-6);
+            }
+
+            .services-features-grid > .feature-highlight-card,
+            .bts-atelier-grid > div {
+                flex: 0 1 calc(50% - var(--space-6) / 2);
+                max-width: calc(50% - var(--space-6) / 2);
+            }
         }
     </style>
 </head>
@@ -136,30 +297,20 @@
         <div class="container navbar-container">
             <a href="index.html" class="navbar-brand">
                 <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Solace">
-                    <title>Solace</title>
-                    <g transform="translate(4, 4) scale(1.15)">
-                        <circle cx="24" cy="24" r="22" fill="#1A6B72" opacity="0.12" />
-                        <circle cx="24" cy="24" r="22" fill="none" stroke="#52B69A" stroke-width="1.8" opacity="0.4" />
-                        <path d="M 24 3 A 21 21 0 1 1 4 26" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.75" />
-                        <path d="M 24 8 A 16 16 0 1 1 9 28" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.85" />
-                        <path d="M 24 13 A 11 11 0 1 1 14 29" fill="none" stroke="#52B69A" stroke-width="1.8"
-                            stroke-linecap="round" opacity="0.95" />
-                        <g transform="translate(24, 24) rotate(-35) translate(-24, -24)">
-                            <circle cx="24" cy="10" r="3.2" fill="#1A6B72" />
-                            <path
-                                d="M 21.5 14 C 21.5 14 20 22 21 28 C 22 33 22.5 38 22.5 38 L 25.5 38 C 25.5 38 26 33 27 28 C 28 22 26.5 14 26.5 14 Z"
-                                fill="#1A6B72" />
-                            <path d="M 22 16 C 17 13 11 10 7 9 C 6.5 10.5 8 12.5 12 14.5 C 16 16.5 21.5 18 21.5 18 Z"
-                                fill="#1A6B72" />
-                            <path d="M 26 16 C 31 13 37 10 41 9 C 41.5 10.5 40 12.5 36 14.5 C 32 16.5 26.5 18 26.5 18 Z"
-                                fill="#1A6B72" />
-                        </g>
+                    aria-label="Atelia">
+                    <title>Atelia</title>
+                    <g transform="translate(4, 6)">
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                            stroke-width="1.6" />
+                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
                     </g>
-                    <text class="brand-text" x="66" y="42" font-family="'Lora','Georgia',serif" font-weight="700"
-                        font-size="34" letter-spacing="-0.5" fill="currentColor">Solace</text>
+                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
                 </svg>
             </a>
 
@@ -167,10 +318,10 @@
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="home2.html" class="nav-link">Home 2</a></li>
-                    <li><a href="services.html" class="nav-link active">Services</a></li>
+                    <li><a href="services.html" class="nav-link">Courses</a></li>
+                    <li><a href="browse-schools.html" class="nav-link active">Gallery</a></li>
                     <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="blog.html" class="nav-link">Journal</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
                 </ul>
@@ -197,31 +348,21 @@
     <div class="mobile-drawer" id="mobileDrawer">
         <div class="drawer-header">
             <a href="index.html" class="navbar-brand">
-                <svg class="brand-logo" viewBox="0 0 180 56" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Solace">
-                    <title>Solace</title>
-                    <g transform="translate(2, 2) scale(1.05)">
-                        <circle cx="24" cy="24" r="22" fill="#1A6B72" opacity="0.12" />
-                        <circle cx="24" cy="24" r="22" fill="none" stroke="#52B69A" stroke-width="1.8" opacity="0.4" />
-                        <path d="M 24 3 A 21 21 0 1 1 4 26" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.75" />
-                        <path d="M 24 8 A 16 16 0 1 1 9 28" fill="none" stroke="#52B69A" stroke-width="2"
-                            stroke-linecap="round" opacity="0.85" />
-                        <path d="M 24 13 A 11 11 0 1 1 14 29" fill="none" stroke="#52B69A" stroke-width="1.8"
-                            stroke-linecap="round" opacity="0.95" />
-                        <g transform="translate(24, 24) rotate(-35) translate(-24, -24)">
-                            <circle cx="24" cy="10" r="3.2" fill="#1A6B72" />
-                            <path
-                                d="M 21.5 14 C 21.5 14 20 22 21 28 C 22 33 22.5 38 22.5 38 L 25.5 38 C 25.5 38 26 33 27 28 C 28 22 26.5 14 26.5 14 Z"
-                                fill="#1A6B72" />
-                            <path d="M 22 16 C 17 13 11 10 7 9 C 6.5 10.5 8 12.5 12 14.5 C 16 16.5 21.5 18 21.5 18 Z"
-                                fill="#1A6B72" />
-                            <path d="M 26 16 C 31 13 37 10 41 9 C 41.5 10.5 40 12.5 36 14.5 C 32 16.5 26.5 18 26.5 18 Z"
-                                fill="#1A6B72" />
-                        </g>
+                <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
+                    aria-label="Atelia">
+                    <title>Atelia</title>
+                    <g transform="translate(4, 6)">
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                            stroke-width="1.6" />
+                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
                     </g>
-                    <text class="brand-text" x="62" y="39" font-family="'Lora','Georgia',serif" font-weight="700"
-                        font-size="30" letter-spacing="-0.5" fill="currentColor">Solace</text>
+                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
                 </svg>
             </a>
             <button class="drawer-close" aria-label="Close Menu">
@@ -231,10 +372,10 @@
         <nav class="drawer-nav">
             <a href="index.html" class="nav-link">Home</a>
             <a href="home2.html" class="nav-link">Home 2</a>
-            <a href="services.html" class="nav-link active">Services</a>
+            <a href="services.html" class="nav-link">Courses</a>
+            <a href="browse-schools.html" class="nav-link active">Gallery</a>
             <a href="about.html" class="nav-link">About</a>
-            <a href="pricing.html" class="nav-link">Pricing</a>
-            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="blog.html" class="nav-link">Journal</a>
             <a href="contact.html" class="nav-link">Contact</a>
             <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
         </nav>
@@ -253,39 +394,35 @@
 
     <section class="page-hero">
         <div class="container">
-            <span class="eyebrow eyebrow-center">Services &amp; Therapies</span>
-            <h1>Explore Float Suites &amp; Add-on Modalities</h1>
-            <p class="page-hero-lead">Filter our zero-gravity float pods, open basin suites, and wellness add-on
-                therapies</p>
+            <span class="eyebrow eyebrow-center">Student Lookbook &amp; Exhibitions</span>
+            <h1>Runway Shows, Collections &amp; Studio Gallery</h1>
+            <p class="page-hero-lead">Browse graduate capsule collections, fashion photography, textile exhibitions, and
+                behind-the-scenes atelier moments</p>
         </div>
     </section>
 
-    <!-- Main Content (Filter & Modalities Directory FIRST) -->
+    <!-- Main Content -->
     <main style="padding: var(--space-8) 0;">
         <div class="container">
 
             <!-- Top Search & Quick Filter Bar -->
-            <div class="directory-search-wrapper"
-                style="background: var(--color-bg-primary); padding: var(--space-5) var(--space-6); border-radius: var(--radius-soft); border: 1px solid var(--color-border); margin-bottom: var(--space-6); box-shadow: var(--shadow-soft);">
-                <div style="display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;">
-                    <div style="flex: 1; min-width: 260px; position: relative;">
-                        <i class="ph ph-magnifying-glass"
-                            style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--color-brand-secondary); font-size: 1.25rem;"></i>
-                        <input type="text" id="therapySearchInput" class="form-control"
-                            placeholder="Search float pods, infrared saunas, or benefits..."
-                            style="padding-left: 48px; height: 48px; border-radius: var(--radius-soft); font-size: 0.95rem;">
+            <div class="directory-search-wrapper">
+                <div class="directory-search-inner">
+                    <div class="directory-search-field">
+                        <i class="ph ph-magnifying-glass search-icon"></i>
+                        <input type="text" id="gallerySearchInput" class="form-control"
+                            placeholder="Search collections, designers..." aria-label="Search gallery">
                     </div>
-                    <select class="form-control"
-                        style="width: auto; min-width: 180px; height: 48px; border-radius: var(--radius-soft);">
-                        <option value="">All Environments</option>
-                        <option value="pod">Enclosed Float Pod</option>
-                        <option value="basin">Horizon Open Basin</option>
-                        <option value="infrared">Infrared Sauna</option>
-                        <option value="redlight">Red Light Room</option>
+                    <select class="form-control directory-search-select" id="galleryCategorySelect"
+                        aria-label="Filter by gallery category">
+                        <option value="">All Categories</option>
+                        <option value="runway">Runway Shows</option>
+                        <option value="collection">Student Collections</option>
+                        <option value="editorial">Fashion Photography</option>
+                        <option value="studio">Behind-the-Scenes</option>
                     </select>
-                    <button class="btn btn-primary"
-                        style="height: 48px; padding: 0 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="ph ph-sliders-horizontal"></i> Filter Modalities
+                    <button class="btn btn-primary directory-search-btn" type="button" id="galleryResetBtn">
+                        <i class="ph ph-arrows-clockwise"></i> Show All
                     </button>
                 </div>
             </div>
@@ -295,235 +432,187 @@
                 <aside class="filter-sidebar">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
-                        <h3 style="font-size: 1.1rem; margin: 0;">Filter Therapies</h3>
-                        <a href="#" style="font-size: 0.8rem; color: var(--color-brand-accent);">Reset All</a>
+                        <h3 style="font-size: 1.25rem; margin: 0;">Gallery Index</h3>
+                        <a href="#" id="galleryResetLink"
+                            style="font-size: 0.875rem; color: var(--color-brand-accent);">Reset</a>
                     </div>
 
-                    <!-- Search Box inside Filter Sidebar -->
+                    <!-- Filter Group 1 -->
                     <div class="filter-group">
-                        <div class="filter-title">Search Modalities</div>
-                        <div style="position: relative;">
-                            <i class="ph ph-magnifying-glass"
-                                style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); font-size: 1rem;"></i>
-                            <input type="text" class="form-control" placeholder="Search therapy..."
-                                style="padding-left: 36px; height: 40px; font-size: 0.875rem; border-radius: var(--radius-soft);">
-                        </div>
-                    </div>
-
-                    <!-- Filter Group 1: Environment -->
-                    <div class="filter-group">
-                        <div class="filter-title">Therapy Environment</div>
+                        <div class="filter-title">Exhibition Type</div>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Enclosed Float Pod
+                            <input type="checkbox" checked> Graduate Runway Shows
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Horizon Open Basin
+                            <input type="checkbox" checked> Capsule Collections
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Full Spectrum Infrared
+                            <input type="checkbox" checked> Editorial Photography
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Red Light Room
+                            <input type="checkbox" checked> Behind-the-Scenes Atelier
                         </label>
                     </div>
 
-                    <!-- Filter Group 2: Duration -->
+                    <!-- Filter Group 2 -->
                     <div class="filter-group">
-                        <div class="filter-title">Session Duration</div>
+                        <div class="filter-title">Academic Cohort</div>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> 60 Minutes
+                            <input type="checkbox" checked> Autumn Runway 2026
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> 90 Minutes
+                            <input type="checkbox" checked> Spring Exhibition 2026
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox"> 120 Minutes
+                            <input type="checkbox"> Archive 2025
                         </label>
                     </div>
 
-                    <!-- Filter Group 3: Location -->
+                    <!-- Filter Group 3 -->
                     <div class="filter-group">
-                        <div class="filter-title">Spa Location</div>
+                        <div class="filter-title">Studio Wing</div>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Downtown Sanctuary
+                            <input type="checkbox" checked> Grand Runway Hall
                         </label>
                         <label class="checkbox-item">
-                            <input type="checkbox" checked> Westside Studio
+                            <input type="checkbox" checked> Textile &amp; Dye Lab
                         </label>
                     </div>
                 </aside>
 
-                <!-- Main Services Directory Grid -->
+                <!-- Main Gallery Grid -->
                 <div class="directory-main">
                     <div class="schools-grid">
-                        <!-- Service Card 1 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 1 -->
+                        <div class="school-card" data-cat="runway collection">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80"
-                                    alt="Executive Pod Suite" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80"
+                                    alt="Aurelia Graduate Runway Collection" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">ISOLATION
-                                    POD</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Executive Zero-Gravity Pod
-                                </h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">RUNWAY
+                                    SHOW</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Aurelia — Autumn Couture
+                                    Runway</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    Complete sensory isolation with starry sky LED controls and 1,000 lbs USP Epsom
-                                    salt.</p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$79
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            60 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Twelve bias-cut silk organza and velvet evening silhouettes by B.Des senior Aria
+                                    Kapoor.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">12 Looks <small>&bull; 2026</small></span>
+                                    <a href="parent-dashboard.html#shortlist" class="btn btn-primary">View Project</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Service Card 2 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 2 -->
+                        <div class="school-card" data-cat="collection">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80"
-                                    alt="Horizon Open Basin Suite" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80"
+                                    alt="Terra Botanical Textile Exhibition" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">OPEN
-                                    BASIN POOL</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Horizon Open Basin Suite</h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">STUDENT
+                                    COLLECTION</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Terra — Botanical Weave
+                                    Exhibition</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    Expansive open-air float pool designed for first-timers seeking high ceilings and
-                                    spaciousness.</p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$105
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            90 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Zero-waste handwoven linen and madder-root dyed coats exhibited in the Textile Wing.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">8 Looks <small>&bull; Eco Award</small></span>
+                                    <a href="parent-dashboard.html#shortlist" class="btn btn-primary">View Project</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Service Card 3 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 3 -->
+                        <div class="school-card" data-cat="editorial">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80"
-                                    alt="Infrared Sauna Suite" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80"
+                                    alt="Editorial Fashion Photography Shoot" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">INFRARED
-                                    &amp; HALO</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Full Spectrum Infrared Sauna
-                                </h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">FASHION
+                                    PHOTOGRAPHY</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Nocturne Editorial Lookbook</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    Deep cellular heat detox combined with pharmaceutical halo salt aerosol for
-                                    respiratory health.</p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$45
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            45 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Studio portrait and street-editorial series styled by our Luxury Styling &amp; Media
+                                    cohort.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">18 Plates <small>&bull; Editorial</small></span>
+                                    <a href="parent-dashboard.html#shortlist" class="btn btn-primary">View Project</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Service Card 4 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 4 -->
+                        <div class="school-card" data-cat="studio">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
-                                    alt="Red Light Recovery Suite" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&q=80"
+                                    alt="Behind the Scenes Garment Construction" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">RED
-                                    LIGHT THERAPY</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Targeted Red Light Suite</h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">BEHIND-THE-SCENES</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Atelier Pattern &amp; Fitting
+                                    Lab</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    660nm red and 850nm near-infrared wavelengths for skin collagen synthesis and joint
-                                    relief.</p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$35
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            20 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Candid moments of muslin toile pinning, French seam finishing, and pre-runway
+                                    steaming.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">Studio B <small>&bull; Process</small></span>
+                                    <a href="parent-dashboard.html#shortlist" class="btn btn-primary">View Project</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Service Card 5 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 5 -->
+                        <div class="school-card" data-cat="studio">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80"
-                                    alt="Couples Float Suite" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80"
+                                    alt="Fashion Illustration & Sketching" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">COUPLES
-                                    SANCTUARY</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Couples Double Float Suite
-                                </h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">CREATIVE
+                                    PROJECT</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Croquis &amp; Swatch Portfolio
+                                    Wall</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    Float together in an extra-wide zero-gravity pool with dual rain shower amenities.
-                                </p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$140
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            60 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Watercolor fashion illustrations, technical flats, and fabric boards from Foundation
+                                    Year.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">24 Plates <small>&bull; Exhibition</small></span>
+                                    <a href="parent-dashboard.html#shortlist" class="btn btn-primary">View Project</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Service Card 6 -->
-                        <div class="school-card">
+                        <!-- Gallery Item 6 -->
+                        <div class="school-card" data-cat="runway editorial">
                             <div class="school-card-img-wrapper">
-                                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80"
-                                    alt="Float + Sauna Combo" class="school-card-img">
+                                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80"
+                                    alt="Backstage Runway Preparation" class="school-card-img" loading="lazy">
                             </div>
                             <div class="school-card-content">
                                 <span
-                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">COMBINATION
-                                    RITUAL</span>
-                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Float + Infrared Sauna Ritual
-                                </h3>
+                                    style="font-size: 0.75rem; font-weight: 700; color: var(--color-brand-accent); letter-spacing: 0.05em; text-transform: uppercase;">RUNWAY
+                                    BACKSTAGE</span>
+                                <h3 style="font-size: 1.25rem; margin: 0.25rem 0 0.5rem;">Backstage Dress Rehearsal</h3>
                                 <p
                                     style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
-                                    The ultimate 90-minute sanctuary pairing: 30m infrared pre-warm followed by a 60m
-                                    pod float.</p>
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
-                                    <span
-                                        style="font-weight: 700; font-size: 1.1rem; color: var(--color-text-primary);">$110
-                                        <span
-                                            style="font-size: 0.8rem; font-weight: 400; color: var(--color-text-secondary);">/
-                                            90 Min</span></span>
-                                    <a href="parent-dashboard.html" class="btn btn-primary"
-                                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Book Session</a>
+                                    Final styling checks, jewelry pairing, and lineup choreography minutes before
+                                    curtain call.</p>
+                                <div class="school-card-footer">
+                                    <span class="card-price">Runway Hall <small>&bull; Live</small></span>
+                                    <a href="parent-dashboard.html#interviews" class="btn btn-primary">Join Next Show</a>
                                 </div>
                             </div>
                         </div>
@@ -533,141 +622,130 @@
         </div>
     </main>
 
-    <!-- Tailored Rest & Cellular Recovery Showcase Section -->
+    <!-- Exhibition & Portfolio Showcase Highlights -->
     <section class="services-intro-section"
         style="padding: var(--space-12) 0; background: var(--color-bg-secondary); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
         <div class="container">
             <div style="text-align: center; max-width: 760px; margin: 0 auto var(--space-10);">
-                <span class="eyebrow eyebrow-center">Sanctuary Modalities</span>
+                <span class="eyebrow eyebrow-center">Annual Exhibitions</span>
                 <h2
-                    style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 700; margin-top: 0.5rem; color: var(--color-text-primary);">
-                    Tailored Rest &amp; Cellular Recovery</h2>
+                    style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; margin-top: 0.5rem; color: var(--color-text-primary);">
+                    Submit Your Collection to the Next Showcase</h2>
                 <p
                     style="font-size: 1.1rem; line-height: 1.6; color: var(--color-text-secondary); margin-top: 0.75rem;">
-                    Experience unmatched spinal decompression, autonomic nervous system soothing, and deep muscle
-                    relaxation through our state-of-the-art float pods and synergistic contrast therapies.</p>
+                    Enrolled students can upload lookbook photography, technical drawings, and runway reels directly
+                    through the Student Dashboard.</p>
             </div>
 
             <div class="services-features-grid"
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: var(--space-6);">
-                <!-- Card 1 -->
                 <div class="feature-highlight-card"
-                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast); display: flex; flex-direction: column;">
+                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; display: flex; flex-direction: column;">
                     <div style="position: relative; height: 190px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80"
-                            alt="Zero-Gravity Flotation"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);"
-                            class="feature-card-img">
-                        <span
-                            style="position: absolute; top: 12px; left: 12px; background: rgba(26, 107, 114, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(4px);">Signature
-                            Modality</span>
+                        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80"
+                            alt="Student Portfolio Submission" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: var(--space-6); flex-grow: 1; display: flex; flex-direction: column;">
-                        <div
-                            style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-brand-secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            <i class="ph ph-drop"></i> 60 &amp; 90 Min Sessions
-                        </div>
-                        <h3
-                            style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">
-                            Zero-Gravity Flotation</h3>
-                        <p
-                            style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: var(--space-4);">
-                            1,000 lbs of medical-grade Epsom salt dissolved in skin-temperature water to weightlessly
-                            relieve joint strain and invite Theta brainwave relaxation.</p>
-                        <a href="pricing.html"
-                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-brand-primary); display: inline-flex; align-items: center; gap: 0.35rem;">Book
-                            Float Session <i class="ph ph-arrow-right"></i></a>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Portfolio Jury</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+                            Upload your high-resolution lookbook plates for critique by visiting fashion directors.</p>
+                        <a href="parent-dashboard.html#vault"
+                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-accent-ink);">Upload
+                            Portfolio <i class="ph ph-arrow-right"></i></a>
                     </div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="feature-highlight-card"
-                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast); display: flex; flex-direction: column;">
+                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; display: flex; flex-direction: column;">
                     <div style="position: relative; height: 190px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
-                            alt="Infrared & Red Light"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);"
-                            class="feature-card-img">
-                        <span
-                            style="position: absolute; top: 12px; left: 12px; background: rgba(82, 182, 154, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(4px);">Cellular
-                            Detox</span>
+                        <img src="https://images.unsplash.com/photo-1524275539700-cf51138f679b?auto=format&fit=crop&w=800&q=80"
+                            alt="Textile Archive Exhibition" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: var(--space-6); flex-grow: 1; display: flex; flex-direction: column;">
-                        <div
-                            style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-brand-secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            <i class="ph ph-sun"></i> 30 &amp; 45 Min Therapy
-                        </div>
-                        <h3
-                            style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">
-                            Infrared &amp; Red Light</h3>
-                        <p
-                            style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: var(--space-4);">
-                            Full-spectrum infrared heat deeply penetrates tissue to boost collagen production,
-                            accelerate metabolic recovery, and soothe chronic muscle soreness.</p>
-                        <a href="pricing.html"
-                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-brand-primary); display: inline-flex; align-items: center; gap: 0.35rem;">Explore
-                            Infrared <i class="ph ph-arrow-right"></i></a>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Textile Exhibitions</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+                            Discover experimental weaves, botanical dye studies, and zero-waste surface embellishments.</p>
+                        <a href="services.html"
+                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-accent-ink);">Explore
+                            Textile Lab <i class="ph ph-arrow-right"></i></a>
                     </div>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="feature-highlight-card"
-                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast); display: flex; flex-direction: column;">
+                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; display: flex; flex-direction: column;">
                     <div style="position: relative; height: 190px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80"
-                            alt="Vibroacoustic Sound"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);"
-                            class="feature-card-img">
-                        <span
-                            style="position: absolute; top: 12px; left: 12px; background: rgba(26, 107, 114, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(4px);">Soundscape
-                            Meditation</span>
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80"
+                            alt="Runway Show Registration" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: var(--space-6); flex-grow: 1; display: flex; flex-direction: column;">
-                        <div
-                            style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-brand-secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            <i class="ph ph-waves"></i> Underwater Frequency
-                        </div>
-                        <h3
-                            style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">
-                            Vibroacoustic Sound</h3>
-                        <p
-                            style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: var(--space-4);">
-                            Underwater soundscapes and tactile low-frequency vibrations synchronized with light
-                            sequences for sensory meditation.</p>
-                        <a href="pricing.html"
-                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-brand-primary); display: inline-flex; align-items: center; gap: 0.35rem;">Listen
-                            &amp; Book <i class="ph ph-arrow-right"></i></a>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Runway Passes</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+                            Reserve front-row student passes or backstage volunteer slots for upcoming shows.</p>
+                        <a href="parent-dashboard.html#interviews"
+                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-accent-ink);">Register
+                            for Events <i class="ph ph-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Behind-the-Scenes Atelier Process -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto var(--space-8);">
+                <span class="eyebrow eyebrow-center">Behind the Scenes</span>
+                <h2>Inside the Atelier Before Curtain Call</h2>
+                <p class="subtext">From first muslin pinning on studio dress forms to final backstage steam and runway lighting.</p>
+            </div>
+
+            <div class="bts-atelier-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: var(--space-6);">
+                <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 210px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80"
+                            alt="Muslin Draping and Tailoring Fittings" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: var(--space-5);">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem;">01. Muslin &amp; Form Fittings</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin: 0;">Faculty and students refine dart geometry and bias drape before cutting final couture silks.</p>
                     </div>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="feature-highlight-card"
-                    style="background: var(--color-bg-primary); border-radius: var(--radius-soft); border: 1px solid var(--color-border); overflow: hidden; transition: transform var(--transition-fast), box-shadow var(--transition-fast); display: flex; flex-direction: column;">
-                    <div style="position: relative; height: 190px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80"
-                            alt="Private Suite Amenities"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-normal);"
-                            class="feature-card-img">
-                        <span
-                            style="position: absolute; top: 12px; left: 12px; background: rgba(82, 182, 154, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(4px);">All-Inclusive</span>
+                <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 210px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1524275539700-cf51138f679b?auto=format&fit=crop&w=800&q=80"
+                            alt="Textile Selection and Botanical Dyeing" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <div style="padding: var(--space-6); flex-grow: 1; display: flex; flex-direction: column;">
-                        <div
-                            style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-brand-secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            <i class="ph ph-sparkle"></i> Private Luxury Suite
-                        </div>
-                        <h3
-                            style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-text-primary);">
-                            Private Suite Amenities</h3>
-                        <p
-                            style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: var(--space-4);">
-                            Each session includes your dedicated suite, private rain shower, organic body care,
-                            earplugs, plush robe, and tea lounge access.</p>
-                        <a href="pricing.html"
-                            style="margin-top: auto; font-size: 0.875rem; font-weight: 600; color: var(--color-brand-primary); display: inline-flex; align-items: center; gap: 0.35rem;">View
-                            Sanctuary Suites <i class="ph ph-arrow-right"></i></a>
+                    <div style="padding: var(--space-5);">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem;">02. Swatching &amp; Dye Baths</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin: 0;">Hand-dyed organza, raw peace silk, and botanical prints curated in our textile wing.</p>
                     </div>
                 </div>
+
+                <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-soft); overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="height: 210px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80"
+                            alt="Runway Lineup and Editorial Shoot" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: var(--space-5);">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.4rem;">03. Backstage &amp; Runway</h3>
+                        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin: 0;">Model fittings, choreography rehearsals, and editorial lookbook photography on show night.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Gallery & Portfolio CTA -->
+    <section class="section"
+        style="background-color: var(--color-brand-accent); color: white; text-align: center; margin: var(--space-8) var(--space-4); border-radius: var(--radius-soft);">
+        <div class="container">
+            <h2 style="color: white; font-family: var(--font-display);">Share Your Collection With the Atelia Jury</h2>
+            <p style="color: rgba(255,255,255,0.88); font-size: 1.1rem; max-width: 600px; margin: 0 auto var(--space-6);">
+                Upload your lookbook plates in the Student Dashboard or reserve your seat for our upcoming Autumn Graduate Runway.</p>
+            <div class="cta-actions">
+                <a href="parent-dashboard.html#vault" class="btn cta-btn cta-btn-solid">Upload Portfolio</a>
+                <a href="parent-dashboard.html#interviews" class="btn cta-btn cta-btn-ghost">Register for Shows</a>
             </div>
         </div>
     </section>
@@ -679,83 +757,104 @@
                 <div class="footer-brand">
                     <a href="index.html" class="navbar-brand">
                         <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                            aria-label="Solace">
-                            <title>Solace</title>
-                            <g transform="translate(4, 4) scale(1.15)">
-                                <circle cx="24" cy="24" r="22" fill="#1A6B72" opacity="0.12" />
-                                <circle cx="24" cy="24" r="22" fill="none" stroke="#52B69A" stroke-width="1.8"
-                                    opacity="0.4" />
-                                <path d="M 24 3 A 21 21 0 1 1 4 26" fill="none" stroke="#52B69A" stroke-width="2"
-                                    stroke-linecap="round" opacity="0.75" />
-                                <path d="M 24 8 A 16 16 0 1 1 9 28" fill="none" stroke="#52B69A" stroke-width="2"
-                                    stroke-linecap="round" opacity="0.85" />
-                                <path d="M 24 13 A 11 11 0 1 1 14 29" fill="none" stroke="#52B69A" stroke-width="1.8"
-                                    stroke-linecap="round" opacity="0.95" />
-                                <g transform="translate(24, 24) rotate(-35) translate(-24, -24)">
-                                    <circle cx="24" cy="10" r="3.2" fill="#1A6B72" />
-                                    <path
-                                        d="M 21.5 14 C 21.5 14 20 22 21 28 C 22 33 22.5 38 22.5 38 L 25.5 38 C 25.5 38 26 33 27 28 C 28 22 26.5 14 26.5 14 Z"
-                                        fill="#1A6B72" />
-                                    <path
-                                        d="M 22 16 C 17 13 11 10 7 9 C 6.5 10.5 8 12.5 12 14.5 C 16 16.5 21.5 18 21.5 18 Z"
-                                        fill="#1A6B72" />
-                                    <path
-                                        d="M 26 16 C 31 13 37 10 41 9 C 41.5 10.5 40 12.5 36 14.5 C 32 16.5 26.5 18 26.5 18 Z"
-                                        fill="#1A6B72" />
-                                </g>
-                            </g>
-                            <text class="brand-text" x="66" y="42" font-family="'Lora','Georgia',serif"
-                                font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Solace</text>
-                        </svg>
+                    aria-label="Atelia">
+                    <title>Atelia</title>
+                    <g transform="translate(4, 6)">
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                            stroke-width="1.6" />
+                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
+                    </g>
+                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
+                </svg>
                     </a>
-                    <p class="footer-desc">A tranquil urban sanctuary dedicated to zero-gravity sensory deprivation
-                        float therapy, Epsom salt hydrotherapy, and holistic neuromuscular reset.</p>
+                    <p class="footer-desc">An editorial fashion academy dedicated to haute couture craftsmanship,
+                        sustainable textile research, digital pattern engineering, and emerging runway talent.</p>
                     <div
                         style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
-                        <a href="#" aria-label="Solace Float Spa on X"><i class="ph-fill ph-x-logo"></i></a>
-                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
-                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#" aria-label="Atelia on X"><i class="ph-fill ph-x-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Facebook"><i
+                                class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Instagram"><i
+                                class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Therapies</h4>
+                    <h4 class="footer-heading">Programs</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html">Sensory Float Pods</a></li>
-                        <li><a href="services.html">Open Basin Suites</a></li>
-                        <li><a href="services.html">Infrared Salt Sauna</a></li>
-                        <li><a href="services.html">Red Light Recovery</a></li>
+                        <li><a href="services.html">Fashion Design B.Des</a></li>
+                        <li><a href="services.html">Textile &amp; Surface Design</a></li>
+                        <li><a href="services.html">Pattern Making &amp; Draping</a></li>
+                        <li><a href="services.html">Illustration &amp; Styling</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Member Portal</h4>
+                    <h4 class="footer-heading">Student Portal</h4>
                     <ul class="footer-links">
-                        <li><a href="parent-dashboard.html">Book Float Slot</a></li>
-                        <li><a href="parent-dashboard.html">Package Tracker</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="pricing.html">Membership Plans</a></li>
+                        <li><a href="parent-dashboard.html">Student Dashboard</a></li>
+                        <li><a href="parent-dashboard.html#vault">Portfolio Uploads</a></li>
+                        <li><a href="about.html">About Institute</a></li>
+                        <li><a href="pricing.html">Tuition &amp; Scholarships</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="footer-heading">Sanctuary Hours</h4>
+                    <h4 class="footer-heading">Atelier Hours</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Mon - Fri: 8:00 AM - 10:00 PM</a></li>
-                        <li><a href="#">Sat - Sun: 8:00 AM - 11:00 PM</a></li>
-                        <li><a href="contact.html">Sanctuary Locations</a></li>
+                        <li><a href="contact.html">Mon - Fri: 8:30 AM - 7:30 PM</a></li>
+                        <li><a href="contact.html">Sat: 9:30 AM - 5:00 PM</a></li>
+                        <li><a href="contact.html">Campus &amp; Studio Tours</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Solace Float &amp; Sensory Spa. All rights reserved.</p>
+                <p>&copy; 2026 Atelia. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/interactive.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('gallerySearchInput');
+            const catSelect = document.getElementById('galleryCategorySelect');
+            const resetBtn = document.getElementById('galleryResetBtn');
+            const resetLink = document.getElementById('galleryResetLink');
+            const cards = document.querySelectorAll('.school-card');
+
+            function filterGallery() {
+                const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
+                const cat = (catSelect ? catSelect.value : '').toLowerCase().trim();
+                cards.forEach(card => {
+                    const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+                    const desc = (card.querySelector('p')?.textContent || '').toLowerCase();
+                    const cats = card.getAttribute('data-cat') || '';
+                    const okQ = !q || title.includes(q) || desc.includes(q);
+                    const okC = !cat || cats.includes(cat);
+                    card.style.display = (okQ && okC) ? '' : 'none';
+                });
+            }
+
+            if (searchInput) searchInput.addEventListener('input', filterGallery);
+            if (catSelect) catSelect.addEventListener('change', filterGallery);
+            const resetAll = (e) => {
+                if (e) e.preventDefault();
+                if (searchInput) searchInput.value = '';
+                if (catSelect) catSelect.value = '';
+                filterGallery();
+            };
+            if (resetBtn) resetBtn.addEventListener('click', resetAll);
+            if (resetLink) resetLink.addEventListener('click', resetAll);
+        });
+    </script>
 </body>
 
 </html>

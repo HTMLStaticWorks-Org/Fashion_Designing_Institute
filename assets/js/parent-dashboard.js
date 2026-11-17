@@ -1,5 +1,5 @@
 /*
-  Solace Float Spa - Client Sanctuary Dashboard Scripts
+  Fashion Designing Institute - Student Learning & Portfolio Dashboard Scripts
 
   The dashboard is a single document containing many views. A hash router
   swaps which one is on screen, so each sidebar entry behaves like its own
@@ -9,12 +9,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- Sidebar Toggle (Mobile) ---
   const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
   const dashboardSidebar = document.getElementById('dashboardSidebar');
 
   if (sidebarToggle && dashboardSidebar) {
     sidebarToggle.addEventListener('click', () => {
       dashboardSidebar.classList.toggle('open');
     });
+
+    if (sidebarClose) {
+      sidebarClose.addEventListener('click', () => {
+        dashboardSidebar.classList.remove('open');
+      });
+    }
 
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
@@ -33,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (views.length) {
     const navItems = Array.from(document.querySelectorAll('[data-view]'));
     const titleEl = document.getElementById('dashTitle');
-    const baseTitle = 'Solace Float Spa';
+    const baseTitle = 'Atelia';
     const names = views.map(v => v.id.replace(/^view-/, ''));
     const DEFAULT_VIEW = names[0];
 
@@ -86,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ------------------------------------------------- application status tabs
+  // ------------------------------------------------- course / event filter tabs
 
   document.querySelectorAll('[data-filter-group]').forEach(group => {
     const key = group.dataset.filterGroup;
@@ -116,37 +123,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ------------------------------------------------------------- messages
+  // ------------------------------------------------------------- faculty & studio messages
 
   const threadBody = document.querySelector('[data-thread-body]');
 
   if (threadBody) {
     const THREADS = {
       oakridge: {
-        name: 'Downtown Sanctuary Concierge',
-        avatar: 'assets/images/float-pod-1.jpg',
+        name: 'Prof. Elena Vance — Couture Studio',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
         messages: [
-          { from: 'them', text: 'Good morning Dr. Jenkins! We have sanitized Suite #02 with medical-grade Epsom solution for your upcoming float.', at: 'Mon 09:14' },
-          { from: 'them', text: 'We have reserved Nov 15 at 10:30 AM at the Downtown Sanctuary. Please confirm your arrival time at your earliest convenience.', at: 'Mon 09:15' },
-          { from: 'me', text: 'Thank you! Nov 15 at 10:30 AM works perfectly. Please prep binaural audio theta waves.', at: 'Mon 11:02' },
-          { from: 'them', text: 'Consider it done! 432Hz Binaural Theta track is queued up. Your session lasts 90 minutes.', at: '2h ago' }
+          { from: 'them', text: 'Good morning Aria! Your draped silk bodice toile for Module 04 has been reviewed by the atelier faculty.', at: 'Mon 09:14' },
+          { from: 'them', text: 'Your neckline balance and bias-cut seam finish are runway-ready. Please upload final lookbook photos before Friday.', at: 'Mon 09:15' },
+          { from: 'me', text: 'Thank you Professor! I am photographing the finished look in Studio B today and will upload the high-res plates tonight.', at: 'Mon 11:02' },
+          { from: 'them', text: 'Wonderful. I have also nominated your capsule piece for the Autumn Graduate Runway Jury.', at: '2h ago' }
         ]
       },
       stmarys: {
-        name: "Guide Alex Rivera",
-        avatar: 'assets/images/testimonial-michael.jpg',
+        name: 'Prof. Julian Moreau — Textile Lab',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
         messages: [
-          { from: 'them', text: 'Welcome to Solace Spa! I will be your primary float guide for your session.', at: 'Oct 15' },
-          { from: 'them', text: 'We added organic lavender aromatherapy and warm freshwater shower prep for your arrival.', at: '1d ago' }
+          { from: 'them', text: 'Welcome to the Sustainable Botanical Dyeing Workshop! Your indigo & madder root swatch kit is ready at Bench 04.', at: 'Oct 15' },
+          { from: 'them', text: 'Bring your raw silk organza yardage for tomorrow’s 2:00 PM mordant lab.', at: '1d ago' }
         ]
       },
       dps: {
-        name: 'Spa Reception',
-        avatar: 'assets/images/solace-logo.svg',
+        name: 'Runway & Events Office',
+        avatar: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=200&q=80',
         messages: [
-          { from: 'me', text: 'Hello, could you confirm when my monthly Zenith credits renew?', at: 'Oct 12' },
-          { from: 'them', text: 'Yes! Your 2 monthly Zenith float credits automatically renew on the 1st of each month.', at: 'Oct 13' },
-          { from: 'them', text: 'Thank you — your monthly Zenith renewal has processed successfully.', at: '3d ago' }
+          { from: 'me', text: 'Hello, could you confirm my model fitting slot for the Autumn Couture Showcase?', at: 'Oct 12' },
+          { from: 'them', text: 'Confirmed! Your backstage fitting is scheduled for Nov 22 at 3:30 PM in Runway Hall A.', at: 'Oct 13' },
+          { from: 'them', text: 'Your digital runway pass has been added to your Event Registrations tab.', at: '3d ago' }
         ]
       }
     };
@@ -217,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --------------------------------------------------- shortlist remove/undo
+  // --------------------------------------------------- saved projects / portfolio fav
 
   document.querySelectorAll('.shortlist-fav').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -233,10 +240,101 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Document Upload Mock ---
+  // --------------------------------------------------- event registration toggle
+
+  document.querySelectorAll('[data-event-register]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const registered = btn.getAttribute('data-registered') === 'true';
+      btn.setAttribute('data-registered', String(!registered));
+      if (!registered) {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline');
+        btn.innerHTML = '<i class="ph-fill ph-check-circle"></i> Registered';
+      } else {
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-primary');
+        btn.innerHTML = 'Register for Event';
+      }
+    });
+  });
+
+  // --------------------------------------------------- course module completion toggle
+
+  document.querySelectorAll('[data-module-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const done = btn.getAttribute('data-done') === 'true';
+      btn.setAttribute('data-done', String(!done));
+      const row = btn.closest('tr');
+      const badge = row ? row.querySelector('.status-badge') : null;
+      if (!done) {
+        btn.textContent = 'Completed';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline');
+        if (badge) {
+          badge.className = 'status-badge status-admitted';
+          badge.textContent = 'Completed';
+        }
+      } else {
+        btn.textContent = 'Mark Complete';
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-primary');
+        if (badge) {
+          badge.className = 'status-badge status-review';
+          badge.textContent = 'In Progress';
+        }
+      }
+    });
+  });
+
+  // --------------------------------------------------- portfolio image upload preview
+
+  const portfolioForm = document.getElementById('portfolioUploadForm');
+  const portfolioGrid = document.getElementById('portfolioProjectsGrid');
+  const portfolioFileInput = document.getElementById('portfolioFileInput');
+
+  if (portfolioForm && portfolioGrid && portfolioFileInput) {
+    portfolioForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const titleInput = document.getElementById('portfolioTitleInput');
+      const categoryInput = document.getElementById('portfolioCategoryInput');
+      const title = (titleInput && titleInput.value.trim()) || 'Untitled Atelier Look';
+      const category = (categoryInput && categoryInput.value) || 'Couture & Draping';
+      const file = portfolioFileInput.files && portfolioFileInput.files[0];
+
+      const addCard = (imgSrc) => {
+        const card = document.createElement('div');
+        card.className = 'shortlist-card';
+        card.innerHTML = `
+          <div class="shortlist-img">
+            <img src="${imgSrc}" alt="${title.replace(/"/g, '&quot;')}">
+            <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i class="ph-fill ph-heart"></i></button>
+          </div>
+          <div class="shortlist-body">
+            <span class="badge-chip">${category}</span>
+            <h4>${title.replace(/</g, '&lt;')}</h4>
+            <p class="text-muted" style="font-size:0.85rem;">Uploaded in current browser session • Pending Faculty Review</p>
+          </div>
+        `;
+        portfolioGrid.prepend(card);
+        portfolioForm.reset();
+        const existingDisplay = portfolioForm.querySelector('.file-name-display');
+        if (existingDisplay) existingDisplay.remove();
+      };
+
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (ev) => addCard(ev.target.result);
+        reader.readAsDataURL(file);
+      } else {
+        addCard('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=700&q=80');
+      }
+    });
+  }
+
+  // --- File Input Filename Preview ---
   const fileInputs = document.querySelectorAll('input[type="file"]');
   fileInputs.forEach(input => {
-    input.addEventListener('change', function(e) {
+    input.addEventListener('change', function () {
       if (this.files && this.files.length > 0) {
         const fileName = this.files[0].name;
         const formGroup = this.closest('.form-group');
@@ -248,13 +346,26 @@ document.addEventListener('DOMContentLoaded', () => {
             fileNameDisplay.style.marginTop = '0.5rem';
             fileNameDisplay.style.fontSize = '0.875rem';
             fileNameDisplay.style.color = 'var(--color-status-admitted)';
-            fileNameDisplay.innerHTML = `<i class="ph ph-check-circle"></i> ${fileName} attached`;
+            fileNameDisplay.innerHTML = `<i class="ph ph-check-circle"></i> ${fileName} ready for preview`;
             formGroup.appendChild(fileNameDisplay);
           } else {
-            fileNameDisplay.innerHTML = `<i class="ph ph-check-circle"></i> ${fileName} attached`;
+            fileNameDisplay.innerHTML = `<i class="ph ph-check-circle"></i> ${fileName} ready for preview`;
           }
         }
       }
     });
   });
+
+  // --- Profile Save Feedback ---
+  const profileForm = document.getElementById('studentProfileForm');
+  if (profileForm) {
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const note = document.getElementById('profileSaveStatus');
+      if (note) {
+        note.hidden = false;
+        setTimeout(() => { note.hidden = true; }, 3500);
+      }
+    });
+  }
 });
