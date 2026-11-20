@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,9 +20,9 @@
 
         /* Hero section: apply background-image directly so url() resolves correctly */
         .hero-home2 {
-            background-image: url('https://truerest-assets.b-cdn.net/wp-content/themes/hello-elementor-child/images/Step-2-private-suite.jpg');
+            background-image: url('assets/images/image copy.png');
             background-size: cover;
-            background-position: center right;
+            background-position: center;
         }
 
         /* Fully transparent card — no fill at all, just a glowing border */
@@ -40,13 +40,18 @@
         .hero-search-card h4,
         .hero-search-card .form-label {
             color: #ffffff !important;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
         }
 
         .hero-search-card .form-control {
             background: rgba(255, 255, 255, 0.15) !important;
             border-color: rgba(255, 255, 255, 0.35) !important;
             color: #ffffff !important;
+        }
+
+        .hero-search-card select.form-control option {
+            background-color: #FAF7F2;
+            color: #292326;
         }
 
         .hero-search-card .form-control::placeholder {
@@ -100,9 +105,10 @@
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="home2.html" class="nav-link active">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+
                     <li><a href="services.html" class="nav-link">Courses</a></li>
                     <li><a href="browse-schools.html" class="nav-link">Gallery</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="blog.html" class="nav-link">Journal</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
@@ -153,10 +159,10 @@
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="nav-link">Home</a>
-            <a href="home2.html" class="nav-link active">Home 2</a>
+            <a href="home2.html" class="nav-link active">Home 2</a><a href="about.html" class="nav-link">About</a>
+
             <a href="services.html" class="nav-link">Courses</a>
             <a href="browse-schools.html" class="nav-link">Gallery</a>
-            <a href="about.html" class="nav-link">About</a>
             <a href="blog.html" class="nav-link">Journal</a>
             <a href="contact.html" class="nav-link">Contact</a>
             <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
@@ -177,8 +183,7 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section 2 -->
-        <section class="hero-bg hero-bg--left hero-home2"
-            style="--hero-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80');">
+        <section class="hero-bg hero-bg--left hero-home2" style="--hero-image: url('../images/image copy.png');">
             <div class="container">
                 <div class="hero-bg-inner">
                     <span class="eyebrow eyebrow-center" style="color: #C5A46D;">ATELIER &amp; RUNWAY SHOWCASE</span>
@@ -187,18 +192,23 @@
                         dyeing labs, and 3D digital pattern suites designed to launch visionary fashion careers.</p>
 
                     <div class="hero-search-card">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 0.5rem;">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); flex-wrap: wrap; gap: 0.5rem;">
                             <h4 style="margin: 0;">Book a Private Studio Tour</h4>
-                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-brand-accent); background: var(--color-accent-tint); padding: 0.2rem 0.65rem; border-radius: var(--radius-full);">Autumn Intake Open</span>
+                            <span
+                                style="font-size: 0.75rem; font-weight: 700; color: #21171D; background: #C5A46D; padding: 0.25rem 0.75rem; border-radius: var(--radius-full);">Autumn
+                                Intake Open</span>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-3);">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-3);">
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label class="form-label" for="home2Wing">Campus Studio Wing</label>
                                 <div style="position: relative;">
                                     <i class="ph ph-map-pin"
                                         style="position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary);"></i>
-                                    <input id="home2Wing" type="text" class="form-control" placeholder="Select studio wing"
-                                        style="padding-left: 2.35rem;" value="Main Atelier — Couture Wing">
+                                    <input id="home2Wing" type="text" class="form-control"
+                                        placeholder="Select studio wing" style="padding-left: 2.35rem;"
+                                        value="Main Atelier — Couture Wing">
                                 </div>
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
@@ -225,8 +235,7 @@
                     </div>
 
                     <div class="hero-mobile-img">
-                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=80"
-                            alt="Atelia Runway Showcase">
+                        <img src="assets/images/image copy.png" alt="Atelia Runway Showcase">
                     </div>
                 </div>
             </div>
@@ -245,8 +254,8 @@
                     <!-- Studio 1 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80"
-                                alt="Haute Couture Draping Studio" class="school-card-img">
+                            <img src="assets/images/image copy 2.png" alt="Haute Couture Draping Studio"
+                                class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">COUTURE STUDIO</span>
@@ -263,8 +272,8 @@
                     <!-- Studio 2 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1524275539700-cf51138f679b?auto=format&fit=crop&w=900&q=80"
-                                alt="Botanical Dyeing & Weaving Lab" class="school-card-img">
+                            <img src="assets/images/image copy 18.png" alt="Botanical Dyeing & Weaving Lab"
+                                class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">TEXTILE LAB</span>
@@ -281,8 +290,8 @@
                     <!-- Studio 3 -->
                     <div class="school-card">
                         <div class="school-card-img-wrapper">
-                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80"
-                                alt="CLO 3D & Pattern Engineering" class="school-card-img">
+                            <img src="assets/images/image copy 6.png" alt="CLO 3D & Pattern Engineering"
+                                class="school-card-img">
                         </div>
                         <div class="school-card-content">
                             <span class="school-board-tag">DIGITAL CAD</span>
@@ -438,7 +447,8 @@
                             <div class="row-icon"><i class="ph ph-seal-percent"></i></div>
                             <div class="row-main">
                                 <div class="row-title">Multi-Term Merit Grant</div>
-                                <div class="row-meta" data-readout="savingsnote">Enroll in multiple terms to unlock up to
+                                <div class="row-meta" data-readout="savingsnote">Enroll in multiple terms to unlock up
+                                    to
                                     20% merit grant</div>
                             </div>
                             <div class="row-value" data-readout="savings">&minus;$0</div>
@@ -459,7 +469,8 @@
                 <div class="section-header">
                     <span class="eyebrow">Institute Calendar</span>
                     <h2>Upcoming Fashion Shows &amp; Workshops</h2>
-                    <p class="subtext">Reserve your seat for graduate runway shows, masterclasses, and portfolio reviews</p>
+                    <p class="subtext">Reserve your seat for graduate runway shows, masterclasses, and portfolio reviews
+                    </p>
                 </div>
                 <div style="max-width: 800px; margin: 0 auto;">
                     <!-- Event 1 -->
@@ -489,7 +500,8 @@
                             </div>
                             <div class="deadline-info">
                                 <h4>Haute Couture Tambour Beading Masterclass</h4>
-                                <p>Hands-on evening atelier workshop covering Luneville hook embroidery on silk organza.</p>
+                                <p>Hands-on evening atelier workshop covering Luneville hook embroidery on silk organza.
+                                </p>
                             </div>
                         </div>
                         <span class="deadline-tag"
@@ -506,7 +518,8 @@
                             </div>
                             <div class="deadline-info">
                                 <h4>Portfolio Review &amp; Admissions Open Day</h4>
-                                <p>Meet faculty mentors, tour our draping and textile studios, and receive live portfolio
+                                <p>Meet faculty mentors, tour our draping and textile studios, and receive live
+                                    portfolio
                                     feedback.</p>
                             </div>
                         </div>
@@ -530,8 +543,7 @@
                 <!-- Featured story -->
                 <div class="testimonial-feature">
                     <figure class="testimonial-photo">
-                        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80"
-                            alt="Graduating fashion designer in atelier">
+                        <img src="assets/images/image copy 19.png" alt="Graduating fashion designer runway showcase">
                         <div class="testimonial-photo-badge">
                             <i class="ph-fill ph-sparkle"></i>
                             <span>Awarded <strong>Emerging Couturier 2026</strong></span>
@@ -606,7 +618,8 @@
                                 class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
                                 class="ph-fill ph-star"></i>
                         </div>
-                        <p>&ldquo;Learning CLO 3D alongside traditional flat-pattern drafting prepared me immediately for
+                        <p>&ldquo;Learning CLO 3D alongside traditional flat-pattern drafting prepared me immediately
+                            for
                             my role in a Paris tailoring house.&rdquo;</p>
                         <div class="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80"
@@ -646,31 +659,29 @@
                 <div class="footer-brand">
                     <a href="index.html" class="navbar-brand">
                         <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Atelia">
-                    <title>Atelia</title>
-                    <g transform="translate(4, 6)">
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
-                            stroke-width="1.6" />
-                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
-                            stroke-linejoin="round" />
-                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
-                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
-                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
-                    </g>
-                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
-                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
-                </svg>
+                            aria-label="Atelia">
+                            <title>Atelia</title>
+                            <g transform="translate(4, 6)">
+                                <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                                <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                                    stroke-width="1.6" />
+                                <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                                    stroke-linejoin="round" />
+                                <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                                <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                                <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
+                            </g>
+                            <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                                font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
+                        </svg>
                     </a>
                     <p class="footer-desc">An editorial fashion academy dedicated to haute couture craftsmanship,
                         sustainable textile research, digital pattern engineering, and emerging runway talent.</p>
                     <div
                         style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
                         <a href="#" aria-label="Atelia on X"><i class="ph-fill ph-x-logo"></i></a>
-                        <a href="#" aria-label="Atelia on Facebook"><i
-                                class="ph-fill ph-facebook-logo"></i></a>
-                        <a href="#" aria-label="Atelia on Instagram"><i
-                                class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Instagram"><i class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
 

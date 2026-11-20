@@ -1910,7 +1910,7 @@ p:last-child {
   }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 1024px) {
   .navbar-menu {
     display: none;
     /* Hide desktop menu */
@@ -3903,7 +3903,7 @@ main>section[style*="--color-brand-accent"] {
 /* Above 1024px the sidebar is on screen and already carries the logo, so the
    header would show it twice. Below that the sidebar collapses and the header
    brand becomes the only branding. */
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
   .dashboard-header-brand {
     display: none;
   }
@@ -3997,7 +3997,7 @@ main>section[style*="--color-brand-accent"] {
 
 /* Below 1024px the sidebar collapses and this becomes the compact mobile
    header, so the controls step down with it. */
-@media (max-width: 991.98px) {
+@media (max-width: 1024px) {
 
   .dashboard-header-end .theme-toggle,
   .dashboard-header-end .rtl-toggle,
@@ -5829,11 +5829,9 @@ a.kpi-card:hover {
 }
 
 /* ==========================================================================
-   Header Responsiveness for 1024px Viewports
-   Ensure all navigation links and action buttons fit cleanly without wrapping
-   or collapsing to mobile drawer at 1024px screens.
+   Header Responsiveness — Hamburger Menu at <= 1024px
    ========================================================================== */
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
   .navbar-menu {
     display: flex !important;
   }
@@ -5843,7 +5841,7 @@ a.kpi-card:hover {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1200px) {
   .navbar-container {
     padding-inline: var(--space-3);
   }
@@ -5897,13 +5895,13 @@ a.kpi-card:hover {
   transform: scale(1.02);
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 1024px) {
   .navbar-menu {
-    display: none;
+    display: none !important;
   }
 
   .nav-toggle {
-    display: flex;
+    display: flex !important;
   }
 }
 

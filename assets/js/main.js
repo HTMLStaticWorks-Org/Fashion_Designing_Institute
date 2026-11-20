@@ -4,6 +4,9 @@
 
 // Flagged synchronously so the reveal styles only ever apply when JS is live.
 document.documentElement.classList.add('js');
+if (localStorage.getItem('fdi-dir') === 'rtl') {
+  document.documentElement.setAttribute('dir', 'rtl');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // --- Theme Toggle ---
@@ -50,8 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentDir = document.documentElement.getAttribute('dir');
       if (currentDir === 'rtl') {
         document.documentElement.removeAttribute('dir');
+        localStorage.setItem('fdi-dir', 'ltr');
       } else {
         document.documentElement.setAttribute('dir', 'rtl');
+        localStorage.setItem('fdi-dir', 'rtl');
       }
     });
   });

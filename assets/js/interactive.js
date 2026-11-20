@@ -100,15 +100,15 @@
     const root = document.getElementById('matchFinder');
     if (!root) return;
 
-    const img = (id, w) => id.startsWith('http') ? id : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+    const img = (id) => id.startsWith('http') || id.startsWith('assets/') ? id : `assets/images/${id}`;
 
     const PROGRAMS = [
-      { name: 'B.Des in Fashion Design & Couture', area: 'Main Atelier Campus', board: 'Couture', fee: 4200, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['academics', 'arts', 'boarding'], rating: 4.95, photo: 'photo-1558769132-cb1aea458c5e' },
-      { name: 'Textile Design & Sustainable Weaving', area: 'Textile Research Wing', board: 'Textile', fee: 3600, grades: ['early', 'primary', 'middle'], strengths: ['academics', 'arts'], rating: 4.9, photo: 'photo-1524275539700-cf51138f679b' },
-      { name: 'Pattern Making & Garment Construction', area: 'Tailoring Studio B', board: 'Pattern', fee: 3100, grades: ['primary', 'middle', 'senior'], strengths: ['sports', 'arts', 'boarding'], rating: 4.88, photo: 'photo-1556905055-8f358a7a47b2' },
-      { name: 'Luxury Fashion Styling & Editorial', area: 'Runway & Media Wing', board: 'Styling', fee: 2950, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['arts', 'academics'], rating: 4.92, photo: 'photo-1509631179647-0177331693ae' },
-      { name: 'Fashion Illustration & 3D CLO CAD', area: 'Digital Design Lab', board: 'Couture', fee: 2450, grades: ['early', 'primary'], strengths: ['academics', 'transport'], rating: 4.82, photo: 'photo-1512436991641-6745cdb1723f' },
-      { name: 'Bridal & Eveningwear Atelier Diploma', area: 'Main Atelier Campus', board: 'Couture', fee: 3900, grades: ['middle', 'senior'], strengths: ['sports', 'boarding'], rating: 4.91, photo: 'photo-1490481651871-ab68de25d43d' }
+      { name: 'B.Des in Fashion Design & Couture', area: 'Main Atelier Campus', board: 'Couture', fee: 4200, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['academics', 'arts', 'boarding'], rating: 4.95, photo: 'assets/images/image copy 14.png' },
+      { name: 'Textile Design & Sustainable Weaving', area: 'Textile Research Wing', board: 'Textile', fee: 3600, grades: ['early', 'primary', 'middle'], strengths: ['academics', 'arts'], rating: 4.9, photo: 'assets/images/image copy 3.png' },
+      { name: 'Pattern Making & Garment Construction', area: 'Tailoring Studio B', board: 'Pattern', fee: 3100, grades: ['primary', 'middle', 'senior'], strengths: ['sports', 'arts', 'boarding'], rating: 4.88, photo: 'assets/images/image copy 9.png' },
+      { name: 'Luxury Fashion Styling & Editorial', area: 'Runway & Media Wing', board: 'Styling', fee: 2950, grades: ['early', 'primary', 'middle', 'senior'], strengths: ['arts', 'academics'], rating: 4.92, photo: 'assets/images/image copy 13.png' },
+      { name: 'Fashion Illustration & 3D CLO CAD', area: 'Digital Design Lab', board: 'Couture', fee: 2450, grades: ['early', 'primary'], strengths: ['academics', 'transport'], rating: 4.82, photo: 'assets/images/image copy 6.png' },
+      { name: 'Bridal & Eveningwear Atelier Diploma', area: 'Main Atelier Campus', board: 'Couture', fee: 3900, grades: ['middle', 'senior'], strengths: ['sports', 'boarding'], rating: 4.91, photo: 'assets/images/image copy 7.png' }
     ];
 
     const out = readouts(root);

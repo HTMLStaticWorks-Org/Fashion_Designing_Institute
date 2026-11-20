@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -370,10 +370,42 @@
         }
 
         @media (max-width: 900px) {
+
             .about-story-grid,
             .founders-wrapper {
                 grid-template-columns: 1fr;
                 gap: var(--space-6);
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            .team-grid,
+            .milestones-track {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: var(--space-4);
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 991.98px) {
+
+            .team-grid,
+            .milestones-track {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .about-cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-cta-actions .btn {
+                width: 100%;
+                max-width: 260px;
+                justify-content: center;
+                text-align: center;
             }
         }
     </style>
@@ -406,9 +438,10 @@
                 <ul class="navbar-nav">
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="home2.html" class="nav-link">Home 2</a></li>
+                    <li><a href="about.html" class="nav-link active">About</a></li>
+
                     <li><a href="services.html" class="nav-link">Courses</a></li>
                     <li><a href="browse-schools.html" class="nav-link">Gallery</a></li>
-                    <li><a href="about.html" class="nav-link active">About</a></li>
                     <li><a href="blog.html" class="nav-link">Journal</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li><a href="parent-dashboard.html" class="nav-link">Dashboard</a></li>
@@ -459,10 +492,10 @@
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="nav-link">Home</a>
-            <a href="home2.html" class="nav-link">Home 2</a>
+            <a href="home2.html" class="nav-link">Home 2</a><a href="about.html" class="nav-link active">About</a>
+
             <a href="services.html" class="nav-link">Courses</a>
             <a href="browse-schools.html" class="nav-link">Gallery</a>
-            <a href="about.html" class="nav-link active">About</a>
             <a href="blog.html" class="nav-link">Journal</a>
             <a href="contact.html" class="nav-link">Contact</a>
             <a href="parent-dashboard.html" class="nav-link">Dashboard</a>
@@ -526,8 +559,7 @@
                         </div>
                     </div>
                     <div class="about-story-media">
-                        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80"
-                            alt="Atelia Atelier Studio and Dress Forms" loading="lazy">
+                        <img src="assets/images/image.png" alt="Atelia Atelier Studio and Dress Forms" loading="lazy">
                         <div class="about-story-badge">
                             <i class="ph-fill ph-sparkle" style="color: var(--color-brand-secondary);"></i>
                             <span>Main Couture Atelier &amp; Textile Library</span>
@@ -611,8 +643,8 @@
             <div class="container">
                 <div class="founders-wrapper" style="margin-bottom: var(--space-12);">
                     <div class="founders-media">
-                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&q=80"
-                            alt="Atelia Faculty Directors" loading="lazy">
+                        <img src="assets/images/image copy 26.png" alt="Atelia Faculty Directors in Studio"
+                            loading="lazy">
                     </div>
                     <div>
                         <span class="eyebrow">ACADEMIC LEADERSHIP</span>
@@ -631,7 +663,8 @@
                         </p>
                         <div style="display: flex; gap: var(--space-4); align-items: center;">
                             <div>
-                                <h4 style="margin: 0; font-size: 1.1rem;">Prof. Elena Vance &amp; Prof. Julian Moreau</h4>
+                                <h4 style="margin: 0; font-size: 1.1rem;">Prof. Elena Vance &amp; Prof. Julian Moreau
+                                </h4>
                                 <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Founding
                                     Directors &amp; Deans of Design</span>
                             </div>
@@ -700,7 +733,8 @@
                     style="text-align: center; max-width: 800px; margin: 0 auto var(--space-8);">
                     <span class="eyebrow">OUR EVOLUTION</span>
                     <h2>Milestones in Fashion Education</h2>
-                    <p class="subtext">From our founding draping studio to an internationally recognized design academy</p>
+                    <p class="subtext">From our founding draping studio to an internationally recognized design academy
+                    </p>
                 </div>
 
                 <div class="milestones-track">
@@ -725,7 +759,8 @@
                     <div class="milestone-item">
                         <span class="milestone-year">2026 &bull; Global</span>
                         <h4>1,200+ Alumni Placed</h4>
-                        <p>Reached 96% graduate career placement across luxury labels, ateliers, and editorial houses.</p>
+                        <p>Reached 96% graduate career placement across luxury labels, ateliers, and editorial houses.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -738,7 +773,8 @@
                     style="text-align: center; max-width: 800px; margin: 0 auto var(--space-4);">
                     <span class="eyebrow">FREQUENT QUESTIONS</span>
                     <h2>Admissions &amp; Studio FAQ</h2>
-                    <p class="subtext">Everything prospective students ask about portfolios, equipment, and scholarships</p>
+                    <p class="subtext">Everything prospective students ask about portfolios, equipment, and scholarships
+                    </p>
                 </div>
 
                 <div class="faq-accordion">
@@ -785,7 +821,8 @@
                 <span class="eyebrow eyebrow-center"
                     style="color: #C5A46D; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.16em; margin-bottom: var(--space-2);">BEGIN
                     YOUR DESIGN JOURNEY</span>
-                <h2 style="color: white; font-family: var(--font-display); font-size: 1.85rem; margin-bottom: var(--space-2);">
+                <h2
+                    style="color: white; font-family: var(--font-display); font-size: 1.85rem; margin-bottom: var(--space-2);">
                     Ready to Step Into the Atelier?
                 </h2>
                 <p
@@ -793,7 +830,8 @@
                     Explore our accredited courses, apply for merit scholarships, or schedule a private tour of our
                     draping and textile studios.
                 </p>
-                <div style="display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap;">
+                <div class="about-cta-actions"
+                    style="display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap;">
                     <a href="register.html" class="btn btn-primary"
                         style="background: white; color: var(--color-brand-accent); font-weight: 700; padding: 0.6rem 1.6rem; border-radius: var(--radius-soft); font-size: 0.9rem;">
                         Apply for Admission
@@ -814,31 +852,29 @@
                 <div class="footer-brand">
                     <a href="index.html" class="navbar-brand">
                         <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Atelia">
-                    <title>Atelia</title>
-                    <g transform="translate(4, 6)">
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
-                            stroke-width="1.6" />
-                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
-                            stroke-linejoin="round" />
-                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
-                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
-                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
-                    </g>
-                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
-                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
-                </svg>
+                            aria-label="Atelia">
+                            <title>Atelia</title>
+                            <g transform="translate(4, 6)">
+                                <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                                <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                                    stroke-width="1.6" />
+                                <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                                    stroke-linejoin="round" />
+                                <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                                <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                                <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
+                            </g>
+                            <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                                font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
+                        </svg>
                     </a>
                     <p class="footer-desc">An editorial fashion academy dedicated to haute couture craftsmanship,
                         sustainable textile research, digital pattern engineering, and emerging runway talent.</p>
                     <div
                         style="display: flex; gap: var(--space-2); font-size: 1.5rem; color: var(--color-text-secondary);">
                         <a href="#" aria-label="Atelia on X"><i class="ph-fill ph-x-logo"></i></a>
-                        <a href="#" aria-label="Atelia on Facebook"><i
-                                class="ph-fill ph-facebook-logo"></i></a>
-                        <a href="#" aria-label="Atelia on Instagram"><i
-                                class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Facebook"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#" aria-label="Atelia on Instagram"><i class="ph-fill ph-instagram-logo"></i></a>
                     </div>
                 </div>
 

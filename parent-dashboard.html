@@ -109,7 +109,7 @@
             .pipeline-progress {
                 inset-inline: 23px auto;
                 top: 24px;
-                width: 2px;
+                width: 2px !important;
             }
 
             .pipeline::before {
@@ -379,13 +379,31 @@
             flex-shrink: 0;
         }
 
-        @media (max-width: 991.98px) {
+        @media (max-width: 1024px) {
             .overview-split {
                 grid-template-columns: 1fr !important;
             }
 
             .shortlist-grid {
                 grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+            }
+
+            .dashboard-header {
+                padding: 0 var(--space-4);
+                height: 72px;
+            }
+
+            .dashboard-header-start .nav-toggle {
+                padding: 0.35rem;
+                margin-inline-start: -0.35rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dashboard-header-end .header-profile {
+                width: 34px !important;
+                height: 34px !important;
             }
         }
 
@@ -403,8 +421,9 @@
             }
 
             .interview-card {
+                display: flex !important;
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
                 gap: var(--space-3);
             }
 
@@ -413,7 +432,13 @@
                 align-items: baseline;
                 gap: 0.45rem;
                 flex: none;
+                width: fit-content;
                 padding: 0.4rem 0.75rem;
+            }
+
+            .interview-info {
+                flex: none;
+                width: 100%;
             }
 
             .interview-actions,
@@ -424,6 +449,22 @@
 
             .setting-row {
                 align-items: flex-start;
+            }
+
+            .filter-tabs {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                border-radius: var(--radius-soft) !important;
+                padding: 0.35rem;
+                gap: 0.25rem;
+            }
+
+            .filter-tab {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                border-radius: var(--radius-sm) !important;
             }
         }
 
@@ -711,6 +752,33 @@
                 border-bottom: 1px solid var(--color-border);
             }
         }
+
+        /* ---- Remove sidebar vertical scroll on web view (>= 1025px) ---- */
+        @media (min-width: 1025px) {
+            .dashboard-sidebar-header {
+                height: 70px;
+                padding: 0 var(--space-4);
+            }
+
+            .dashboard-nav {
+                padding: var(--space-2) 0;
+                overflow-y: visible;
+            }
+
+            .dash-nav-item {
+                padding: 0.5rem var(--space-4);
+                font-size: 0.875rem;
+                white-space: nowrap;
+            }
+
+            .dashboard-sidebar > div:last-child {
+                padding: var(--space-3) var(--space-4) !important;
+            }
+
+            .dashboard-sidebar > div:last-child > div:first-child {
+                margin-bottom: var(--space-2) !important;
+            }
+        }
     </style>
 </head>
 
@@ -737,8 +805,7 @@
                         font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
                 </svg>
             </a>
-            <button class="nav-toggle" id="sidebarClose" aria-label="Close Sidebar"
-                style="margin-left: auto;">
+            <button class="nav-toggle" id="sidebarClose" aria-label="Close Sidebar" style="margin-left: auto;">
                 <i class="ph ph-x"></i>
             </button>
         </div>
@@ -808,21 +875,21 @@
                 </button>
                 <a href="index.html" class="navbar-brand dashboard-header-brand">
                     <svg class="brand-logo" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet" role="img"
-                    aria-label="Atelia">
-                    <title>Atelia</title>
-                    <g transform="translate(4, 6)">
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
-                        <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
-                            stroke-width="1.6" />
-                        <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
-                            stroke-linejoin="round" />
-                        <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
-                        <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
-                        <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
-                    </g>
-                    <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
-                        font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
-                </svg>
+                        aria-label="Atelia">
+                        <title>Atelia</title>
+                        <g transform="translate(4, 6)">
+                            <rect x="2" y="2" width="44" height="44" rx="12" fill="#651C32" opacity="0.12" />
+                            <rect x="2" y="2" width="44" height="44" rx="12" fill="none" stroke="#C5A46D"
+                                stroke-width="1.6" />
+                            <path d="M 24 8 L 36 24 L 24 40 L 12 24 Z" fill="none" stroke="#651C32" stroke-width="2"
+                                stroke-linejoin="round" />
+                            <path d="M 24 13 L 30 24 L 24 35 L 18 24 Z" fill="#651C32" />
+                            <circle cx="24" cy="24" r="2.3" fill="#FAF7F2" />
+                            <path d="M 10 24 L 38 24" stroke="#D9A6A8" stroke-width="1.4" stroke-linecap="round" />
+                        </g>
+                        <text class="brand-text" x="62" y="42" font-family="'Playfair Display','Georgia',serif"
+                            font-weight="700" font-size="34" letter-spacing="-0.5" fill="currentColor">Atelia</text>
+                    </svg>
                 </a>
                 <h2 class="sr-only" id="dashTitle">Student Overview</h2>
             </div>
@@ -854,8 +921,7 @@
                             scheduled this week.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <a href="#vault" class="btn btn-primary"
-                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        <a href="#vault" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
                             <i class="ph ph-upload-simple"></i> Upload Portfolio Look
                         </a>
                     </div>
@@ -953,26 +1019,38 @@
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
-                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                            <div
+                                style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
                                     <span>Haute Couture Draping III</span>
                                     <span>85%</span>
                                 </div>
-                                <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
                             </div>
-                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
-                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                            <div
+                                style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
                                     <span>CLO 3D &amp; Digital Patterning</span>
                                     <span>72%</span>
                                 </div>
-                                <div class="progress-track"><div class="progress-fill" style="width: 72%;"></div></div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 72%;"></div>
+                                </div>
                             </div>
-                            <div style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
-                                <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
+                            <div
+                                style="padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-soft);">
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600;">
                                     <span>Botanical Textile Innovation</span>
                                     <span>92%</span>
                                 </div>
-                                <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 92%;"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -989,7 +1067,8 @@
                 <div class="dash-page-head">
                     <div>
                         <h2>My Enrolled Courses</h2>
-                        <div class="sub">Track your active design studios, module completion, and upcoming critiques.</div>
+                        <div class="sub">Track your active design studios, module completion, and upcoming critiques.
+                        </div>
                     </div>
                     <div class="dash-page-actions">
                         <a href="services.html" class="btn btn-primary"
@@ -1001,9 +1080,12 @@
 
                 <div class="dash-card">
                     <div class="filter-tabs" data-filter-group="apps">
-                        <button type="button" class="filter-tab" data-filter="all" aria-pressed="true">All Courses (4)</button>
-                        <button type="button" class="filter-tab" data-filter="active" aria-pressed="false">In Progress (3)</button>
-                        <button type="button" class="filter-tab" data-filter="completed" aria-pressed="false">Completed (1)</button>
+                        <button type="button" class="filter-tab" data-filter="all" aria-pressed="true">All Courses
+                            (4)</button>
+                        <button type="button" class="filter-tab" data-filter="active" aria-pressed="false">In Progress
+                            (3)</button>
+                        <button type="button" class="filter-tab" data-filter="completed" aria-pressed="false">Completed
+                            (1)</button>
                     </div>
 
                     <div class="table-responsive">
@@ -1020,7 +1102,8 @@
                             <tbody data-filter-target="apps">
                                 <tr data-status="active">
                                     <td><strong>Haute Couture Draping III</strong><br><span
-                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-301 &middot; Atelier Studio B</span></td>
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-301
+                                            &middot; Atelier Studio B</span></td>
                                     <td>Prof. Elena Vance</td>
                                     <td>85% (6/7 Modules)</td>
                                     <td><span class="status-badge status-review">In Progress</span></td>
@@ -1029,7 +1112,8 @@
                                 </tr>
                                 <tr data-status="active">
                                     <td><strong>CLO 3D &amp; Digital Pattern Lab</strong><br><span
-                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-214 &middot; CAD Wing</span></td>
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-214
+                                            &middot; CAD Wing</span></td>
                                     <td>Prof. Marcus Chen</td>
                                     <td>72% (5/7 Modules)</td>
                                     <td><span class="status-badge status-review">In Progress</span></td>
@@ -1038,7 +1122,8 @@
                                 </tr>
                                 <tr data-status="active">
                                     <td><strong>Editorial Styling &amp; Art Direction</strong><br><span
-                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-310 &middot; Media Studio</span></td>
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-310
+                                            &middot; Media Studio</span></td>
                                     <td>Prof. Camille Laurent</td>
                                     <td>60% (3/5 Modules)</td>
                                     <td><span class="status-badge status-interview">Critique Due</span></td>
@@ -1047,7 +1132,8 @@
                                 </tr>
                                 <tr data-status="completed">
                                     <td><strong>Botanical Dyeing &amp; Surface Textiles</strong><br><span
-                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-205 &middot; Textile Lab</span></td>
+                                            style="font-size: 0.75rem; color: var(--color-text-secondary);">FDI-205
+                                            &middot; Textile Lab</span></td>
                                     <td>Prof. Julian Moreau</td>
                                     <td>100% (6/6 Modules)</td>
                                     <td><span class="status-badge status-admitted">Completed</span></td>
@@ -1084,7 +1170,7 @@
                     <div class="app-detail-head">
                         <div class="app-detail-school">
                             <div class="app-detail-logo">
-                                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=300&q=80"
+                                <img src="assets/images/image copy 2.png"
                                     alt="Haute Couture Draping III">
                             </div>
                             <div>
@@ -1148,7 +1234,8 @@
                                     <td>Asymmetric Bodice &amp; Princess Seam Foundations</td>
                                     <td><span class="status-badge status-admitted">Completed</span></td>
                                     <td><button type="button" class="btn btn-outline" data-module-toggle
-                                            data-done="true" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
+                                            data-done="true"
+                                            style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1156,7 +1243,8 @@
                                     <td>Bias-Cut Silk Organza Draping &amp; French Seams</td>
                                     <td><span class="status-badge status-admitted">Completed</span></td>
                                     <td><button type="button" class="btn btn-outline" data-module-toggle
-                                            data-done="true" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
+                                            data-done="true"
+                                            style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Completed</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1164,7 +1252,8 @@
                                     <td>Corsetry Boning &amp; Internal Couture Structure</td>
                                     <td><span class="status-badge status-review">In Progress</span></td>
                                     <td><button type="button" class="btn btn-primary" data-module-toggle
-                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark Complete</button>
+                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark
+                                            Complete</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1172,7 +1261,8 @@
                                     <td>Final Capsule Look &amp; Runway Jury Presentation</td>
                                     <td><span class="status-badge status-review">In Progress</span></td>
                                     <td><button type="button" class="btn btn-primary" data-module-toggle
-                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark Complete</button>
+                                            data-done="false" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Mark
+                                            Complete</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1194,7 +1284,8 @@
                 <div class="dash-card">
                     <h3 style="margin-bottom: var(--space-4);">Upload New Portfolio Piece</h3>
                     <form id="portfolioUploadForm">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4);">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4);">
                             <div class="form-group">
                                 <label class="form-label" for="portfolioTitleInput">Project / Look Title</label>
                                 <input type="text" class="form-control" id="portfolioTitleInput"
@@ -1212,7 +1303,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="portfolioFileInput">Select Portfolio Image (JPG, PNG, WEBP)</label>
+                            <label class="form-label" for="portfolioFileInput">Select Portfolio Image (JPG, PNG,
+                                WEBP)</label>
                             <input type="file" class="form-control" id="portfolioFileInput" accept="image/*" required>
                         </div>
 
@@ -1233,18 +1325,22 @@
                                 <div class="upload-slot-title"><i class="ph-fill ph-check-circle"
                                         style="color: var(--color-status-admitted);"></i> Aurelia Look 01 — Draped
                                     Burgundy Gown</div>
-                                <div class="upload-slot-meta">Approved by Prof. Elena Vance &middot; Uploaded Oct 24, 2026</div>
+                                <div class="upload-slot-meta">Approved by Prof. Elena Vance &middot; Uploaded Oct 24,
+                                    2026</div>
                             </div>
-                            <a href="#shortlist" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
+                            <a href="#shortlist" class="btn btn-outline"
+                                style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
                         </div>
                         <div class="upload-slot">
                             <div class="upload-slot-body">
                                 <div class="upload-slot-title"><i class="ph-fill ph-check-circle"
                                         style="color: var(--color-status-admitted);"></i> Botanical Indigo Swatch
                                     Archive</div>
-                                <div class="upload-slot-meta">Approved by Prof. Julian Moreau &middot; Uploaded Oct 18, 2026</div>
+                                <div class="upload-slot-meta">Approved by Prof. Julian Moreau &middot; Uploaded Oct 18,
+                                    2026</div>
                             </div>
-                            <a href="#shortlist" class="btn btn-outline" style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
+                            <a href="#shortlist" class="btn btn-outline"
+                                style="padding: 0.4rem 0.9rem; font-size: 0.85rem;">Preview</a>
                         </div>
                     </div>
                 </div>
@@ -1258,15 +1354,15 @@
                         <div class="sub">Your curated garments, textile studies, and runway portfolio pieces.</div>
                     </div>
                     <div class="dash-page-actions">
-                        <a href="#vault" class="btn btn-primary"
-                            style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i class="ph ph-plus"></i> Upload Look</a>
+                        <a href="#vault" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i
+                                class="ph ph-plus"></i> Upload Look</a>
                     </div>
                 </div>
 
                 <div class="shortlist-grid" id="portfolioProjectsGrid">
                     <div class="shortlist-card">
                         <div class="shortlist-img">
-                            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80"
+                            <img src="assets/images/image copy 11.png"
                                 alt="Aurelia Evening Silhouette">
                             <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
                                     class="ph-fill ph-heart"></i></button>
@@ -1280,7 +1376,7 @@
 
                     <div class="shortlist-card">
                         <div class="shortlist-img">
-                            <img src="https://images.unsplash.com/photo-1524275539700-cf51138f679b?auto=format&fit=crop&w=700&q=80"
+                            <img src="assets/images/image copy 21.png"
                                 alt="Botanical Textile Study">
                             <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
                                     class="ph-fill ph-heart"></i></button>
@@ -1288,13 +1384,14 @@
                         <div class="shortlist-body">
                             <span class="badge-chip">Textile &amp; Surface Design</span>
                             <h4>Madder Root &amp; Raw Linen Study</h4>
-                            <p class="text-muted" style="font-size: 0.85rem;">Faculty Grade: 96% &middot; Swatch Archive</p>
+                            <p class="text-muted" style="font-size: 0.85rem;">Faculty Grade: 96% &middot; Swatch Archive
+                            </p>
                         </div>
                     </div>
 
                     <div class="shortlist-card">
                         <div class="shortlist-img">
-                            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=700&q=80"
+                            <img src="assets/images/image copy 24.png"
                                 alt="Structured Wool Blazer">
                             <button type="button" class="shortlist-fav" aria-label="Toggle favorite"><i
                                     class="ph-fill ph-heart"></i></button>
@@ -1313,7 +1410,8 @@
                 <div class="dash-page-head">
                     <div>
                         <h2>Upcoming Fashion Shows &amp; Workshops</h2>
-                        <div class="sub">Register for runway showcases, guest designer masterclasses, and studio labs.</div>
+                        <div class="sub">Register for runway showcases, guest designer masterclasses, and studio labs.
+                        </div>
                     </div>
                 </div>
 
@@ -1382,7 +1480,8 @@
                 <div class="dash-page-head">
                     <div>
                         <h2>Faculty &amp; Studio Messages</h2>
-                        <div class="sub">Direct communication with your studio mentors, textile lab, and runway office.</div>
+                        <div class="sub">Direct communication with your studio mentors, textile lab, and runway office.
+                        </div>
                     </div>
                 </div>
 
@@ -1430,7 +1529,8 @@
                                     alt="">
                                 <div>
                                     <strong data-thread-name>Prof. Elena Vance — Couture Studio</strong>
-                                    <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Faculty Mentor</div>
+                                    <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Faculty Mentor
+                                    </div>
                                 </div>
                             </div>
                             <div class="msg-thread-body" data-thread-body></div>
@@ -1451,7 +1551,8 @@
                 <div class="dash-page-head">
                     <div>
                         <h2>Certificates &amp; Tuition Ledger</h2>
-                        <div class="sub">Download verified course certificates and review semester tuition &amp; merit grants.</div>
+                        <div class="sub">Download verified course certificates and review semester tuition &amp; merit
+                            grants.</div>
                     </div>
                 </div>
 
@@ -1524,34 +1625,40 @@
                 <div class="dash-card">
                     <div class="notif-list">
                         <div class="notif-item is-unread">
-                            <div class="notif-icon" style="background: var(--color-status-admitted-bg); color: var(--color-status-admitted);">
+                            <div class="notif-icon"
+                                style="background: var(--color-status-admitted-bg); color: var(--color-status-admitted);">
                                 <i class="ph-fill ph-sparkle"></i>
                             </div>
                             <div class="notif-body">
                                 <strong>Graduate Runway Jury Nomination</strong>
-                                <p>Prof. Elena Vance nominated your "Aurelia" silk organza look for the Nov 22 Autumn Runway Showcase.</p>
+                                <p>Prof. Elena Vance nominated your "Aurelia" silk organza look for the Nov 22 Autumn
+                                    Runway Showcase.</p>
                                 <span class="notif-time">2 hours ago</span>
                             </div>
                         </div>
 
                         <div class="notif-item is-unread">
-                            <div class="notif-icon" style="background: var(--color-status-interview-bg); color: var(--color-status-interview);">
+                            <div class="notif-icon"
+                                style="background: var(--color-status-interview-bg); color: var(--color-status-interview);">
                                 <i class="ph-fill ph-calendar-star"></i>
                             </div>
                             <div class="notif-body">
                                 <strong>Workshop Registration Open: Tambour Beading</strong>
-                                <p>Limited to 16 atelier benches on Dec 4. Reserve your seat in the Shows &amp; Workshops tab.</p>
+                                <p>Limited to 16 atelier benches on Dec 4. Reserve your seat in the Shows &amp;
+                                    Workshops tab.</p>
                                 <span class="notif-time">1 day ago</span>
                             </div>
                         </div>
 
                         <div class="notif-item">
-                            <div class="notif-icon" style="background: var(--color-accent-tint); color: var(--color-brand-accent);">
+                            <div class="notif-icon"
+                                style="background: var(--color-accent-tint); color: var(--color-brand-accent);">
                                 <i class="ph-fill ph-certificate"></i>
                             </div>
                             <div class="notif-body">
                                 <strong>Certificate Issued: Botanical Dyeing</strong>
-                                <p>Your digital credential for FDI-205 is now available under Certificates &amp; Tuition.</p>
+                                <p>Your digital credential for FDI-205 is now available under Certificates &amp;
+                                    Tuition.</p>
                                 <span class="notif-time">4 days ago</span>
                             </div>
                         </div>
@@ -1570,7 +1677,8 @@
 
                 <div class="dash-card">
                     <form id="studentProfileForm">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4);">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4);">
                             <div class="form-group">
                                 <label class="form-label" for="profName">Full Name</label>
                                 <input type="text" class="form-control" id="profName" value="Aria Kapoor">
@@ -1596,12 +1704,15 @@
 
                         <div class="form-group">
                             <label class="form-label" for="profBio">Designer Statement</label>
-                            <textarea class="form-control" id="profBio" rows="3">Final-year B.Des fellow exploring architectural silk draping, botanical dyeing, and zero-waste eveningwear silhouettes.</textarea>
+                            <textarea class="form-control" id="profBio"
+                                rows="3">Final-year B.Des fellow exploring architectural silk draping, botanical dyeing, and zero-waste eveningwear silhouettes.</textarea>
                         </div>
 
                         <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
                             <button type="submit" class="btn btn-primary">Save Profile Changes</button>
-                            <span id="profileSaveStatus" style="color: var(--color-status-admitted); font-size: 0.875rem; font-weight: 600;" hidden>
+                            <span id="profileSaveStatus"
+                                style="color: var(--color-status-admitted); font-size: 0.875rem; font-weight: 600;"
+                                hidden>
                                 <i class="ph-fill ph-check-circle"></i> Profile updated for this session
                             </span>
                         </div>
@@ -1614,7 +1725,8 @@
                 <div class="dash-page-head">
                     <div>
                         <h2>Portal Settings</h2>
-                        <div class="sub">Control portfolio visibility, workshop reminders, and display preferences.</div>
+                        <div class="sub">Control portfolio visibility, workshop reminders, and display preferences.
+                        </div>
                     </div>
                 </div>
 
@@ -1623,7 +1735,8 @@
                         <div class="setting-row">
                             <div>
                                 <strong>Public Graduate Lookbook Visibility</strong>
-                                <p>Allow industry recruiters and runway jury members to view your approved portfolio looks.</p>
+                                <p>Allow industry recruiters and runway jury members to view your approved portfolio
+                                    looks.</p>
                             </div>
                             <button type="button" class="switch" role="switch" aria-pressed="true"
                                 aria-label="Toggle public lookbook visibility"></button>
